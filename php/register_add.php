@@ -14,11 +14,12 @@ if ($_POST['register']) {
     $password = $_POST['password'];
     $rePassword = $_POST['repassword'];
     $elecSeat = $_POST['elecSeat'];
+    $address = $_POST['address'];
 
     $encPass = md5($password);
 
-    $sql = "INSERT INTO user(firstname, lastname, username, email, contact, nic, password, electoralseat) 
-            VALUES ('$firstname', '$lastname', '$username' , '$email', '$phone', '$nic' , '$encPass' ,'$elecSeat')";
+    $sql = "INSERT INTO user(firstname, lastname, username, email, contact, nic, password, electoralseat, address) 
+            VALUES ('$firstname', '$lastname', '$username' , '$email', '$phone', '$nic' , '$encPass' ,'$elecSeat', '$address')";
 
 
 

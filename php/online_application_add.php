@@ -27,7 +27,19 @@ if (isset($_POST['application_save'])) {
 
     if (mysqli_query($conn, $sql)) {
         $_SESSION["FORM_SUBMITTED"] = true;
+        $email = $_SESSION['USER_EMAIL'];
         session_write_close();
+
+        $to = $email;
+        $mailSubject =  "PCD Office Application Submitted..";
+        $emailBody = "Dear <b> $name </b> your application is submitted. <br>
+                Now you can see submitted application on our site under Online Application tab. <br>
+                Your <b>Application Number :</b> $applicationNo <br>
+                <br>Thank You !";
+
+        $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+
+        mail($to, $mailSubject, $emailBody, $header);
 
         if (isset($_SESSION['logged'])) {
             header('location: ../online_application_home.php');

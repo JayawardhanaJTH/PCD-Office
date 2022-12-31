@@ -87,6 +87,18 @@ include "support/header.php";
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="address">Address</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please enter address.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="elecSeat">Electoral seat</label>
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-user"></i></div>

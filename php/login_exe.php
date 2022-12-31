@@ -41,58 +41,48 @@ if (isset($_POST['login_btn'])) {
 		$staff = mysqli_query($conn, $staff_query);
 		$people = mysqli_query($conn, $people_query);
 
-		if ($staff) {
-			if (mysqli_num_rows($staff) == 1) {
-				session_regenerate_id();
-				$user = mysqli_fetch_assoc($staff);
+		if (mysqli_num_rows($staff) == 1) {
+			session_regenerate_id();
+			$user = mysqli_fetch_assoc($staff);
 
-				$_SESSION['logged'] = true;
-				$_SESSION['username'] = $user['username'];
-				$_SESSION['TYPE'] = $user['type'];
-				$_SESSION['USER_ID'] = $user['staffId'];
+			$_SESSION['logged'] = true;
+			$_SESSION['username'] = $user['username'];
+			$_SESSION['TYPE'] = $user['type'];
+			$_SESSION['USER_ID'] = $user['staffId'];
 
-				//set cookie to 1 hour
-				setcookie("loginSession", md5($use['staffId']), time() + (3600), '/');
+			//set cookie to 1 hour
+			setcookie("loginSession", md5($use['staffId']), time() + (3600), '/');
 
-				// if ($user['type'] == '2') {
-				// 	$uer_id = $user['id'];
+			session_write_close();
 
-				// 	$sql = "SELECT electoralseat FROM user WHERE id = '$uer_id'";
+			header("Location: ../index.php");
+			exit();
+		} else if (mysqli_num_rows($people) == 1) {
+			session_regenerate_id();
+			$user = mysqli_fetch_assoc($people);
 
-				// 	$result3 = mysqli_query($conn, $sql);
-				// 	$electoralseat = mysqli_fetch_assoc($result3);
+			$_SESSION['logged'] = true;
+			$_SESSION['username'] = $user['username'];
+			$_SESSION['TYPE'] = '0';
+			$_SESSION['USER_ID'] = $user['peopleId'];
+			$_SESSION['USER_NIC'] = $user['nic'];
+			$_SESSION['USER_EMAIL'] = $email;
 
-				// 	$_SESSION['ELEC_SEAT'] = $electoralseat['electoralseat'];
-				// }
-				session_write_close();
+			//set cookie to 1 hour
+			setcookie("loginSession", md5($use['id']), time() + (3600), '/');
 
-				header("Location: ../index.php");
-				exit();
-			} else if (mysqli_num_rows($people) == 1) {
-				session_regenerate_id();
-				$user = mysqli_fetch_assoc($people);
+			session_write_close();
 
-				$_SESSION['logged'] = true;
-				$_SESSION['username'] = $user['username'];
-				$_SESSION['TYPE'] = '0';
-				$_SESSION['USER_ID'] = $user['peopleId'];
+			header("Location: ../index.php");
+			exit();
+		} else {
+			$Err = "Invalid email or password";
+			$_SESSION['login_err'] = $Err;
 
-				//set cookie to 1 hour
-				setcookie("loginSession", md5($use['id']), time() + (3600), '/');
+			session_write_close();
 
-				session_write_close();
-
-				header("Location: ../index.php");
-				exit();
-			} else {
-				$Err = "Invalid email or password";
-				$_SESSION['login_err'] = $Err;
-
-				session_write_close();
-
-				header("Location: ../login.php");
-				exit();
-			}
+			header("Location: ../login.php");
+			exit();
 		}
 	} else {
 
