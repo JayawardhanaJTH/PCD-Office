@@ -25,15 +25,21 @@ $("#add_staff").click(function () {
     valid = false;
   } else if (!ValidateEmail(email)) {
     error_popup("You have entered an invalid email address!");
-    return false;
+    valid = false;
   } else if (nic == "") {
     error_popup("Please Enter NIC number");
+    valid = false;
+  } else if (!validateNIC(nic)) {
+    error_popup("Please Enter valid NIC number");
     valid = false;
   } else if (gender == "") {
     error_popup("Please Select Gender");
     valid = false;
   } else if (contact_number == "") {
     error_popup("Please Enter Contact Number");
+    valid = false;
+  } else if (!ValidateContact(contact_number)) {
+    error_popup("Please Enter valid Contact Number");
     valid = false;
   } else if (address == "") {
     error_popup("Please Enter Address");
@@ -119,6 +125,27 @@ function ValidateEmail(email) {
   if (email.match(mailFormat)) {
     return true;
   } else {
+    return false;
+  }
+}
+
+function ValidateContact(contact) {
+  var contactPattern = /^(\d{10})$/g;
+
+  if (contact.match(contactPattern)) {
+    return true;
+  } else {
+    //contact not match
+    return false;
+  }
+}
+
+function validateNIC(nic) {
+  var nicPattern = /[0-9]{9}[A-Z|a-z]{1}$/g;
+  if (nic.match(nicPattern)) {
+    return true;
+  } else {
+    //nic not match
     return false;
   }
 }

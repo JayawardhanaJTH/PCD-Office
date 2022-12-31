@@ -17,7 +17,7 @@ include "support/header.php";
 				<div class="card-body">
 					<h1>Total registered staff</h1>
 					<?php
-					$sql = "select count(*) as total from staff";
+					$sql = "select count(*) as total from staff  where type = 2";
 					$rs = mysqli_query($conn, $sql);
 
 					if ($row = mysqli_fetch_array($rs)) {

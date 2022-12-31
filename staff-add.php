@@ -22,7 +22,7 @@ include "support/header.php";
                             </div>
                             <input class="form-control" type="text" id="firstName" name="firstName" placeholder="First name" required>
                             <div class="invalid-feedback">
-                                Please select a reason.
+                                Please enter first name.
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ include "support/header.php";
                             </div>
                             <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Last name" required>
                             <div class="invalid-feedback">
-                                Please select a reason.
+                                Please enter last name.
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ include "support/header.php";
                             </div>
                             <input class="form-control" type="text" id="username" name="username" placeholder="username" required>
                             <div class="invalid-feedback">
-                                Please select a reason.
+                                Please enter username.
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ include "support/header.php";
                             </div>
                             <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
                             <div class="invalid-feedback">
-                                Please select a reason.
+                                Please enter valid email.
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ include "support/header.php";
                                     <option value="female">Female</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Please select a reason.
+                                    Please select gender.
                                 </div>
                             </div>
                         </div>
