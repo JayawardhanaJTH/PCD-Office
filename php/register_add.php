@@ -18,25 +18,25 @@ if ($_POST['register']) {
 
     $encPass = md5($password);
 
-    $sql = "INSERT INTO user(firstname, lastname, username, email, contact, nic, password, electoralseat, address) 
+    //check the email is already used
+    $query = "SELECT peopleId FROM people WHERE email='$email'";
+
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) != 0) {
+        $_SESSION['EMAIL_USED'] = true;
+        session_write_close();
+
+        header("location: ../register.php");
+        exit();
+    }
+
+    $sql = "INSERT INTO people(firstname, lastname, username, email, contact, nic, password, electoralseat, address) 
             VALUES ('$firstname', '$lastname', '$username' , '$email', '$phone', '$nic' , '$encPass' ,'$elecSeat', '$address')";
 
 
 
     if (mysqli_query($conn, $sql)) {
-
-        //get inserted user
-        $query = "SELECT * FROM user WHERE email='$email' AND password='$encPass'";
-
-        $result = mysqli_query($conn, $query);
-        $user = mysqli_fetch_assoc($result);
-
-        $id = $user['id'];
-
-        $sql2 = "INSERT INTO user_login(id,username, email, password, type) 
-                    VALUES ('$id','$username','$email','$encPass','2')";
-
-        mysqli_query($conn, $sql2);
 
         $to = $email;
         $mailSubject =  "PCD Office Account Created..";

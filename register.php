@@ -192,3 +192,18 @@ if (isset($_SESSION["REGISTERED"])) {
     }
 }
 ?>
+
+<?php
+
+if (isset($_SESSION['EMAIL_USED'])) {
+    if ($_SESSION['EMAIL_USED']) {
+        unset($_SESSION["EMAIL_USED"]);
+
+?>
+        <script type="text/javascript">
+            error_popup('The email is already registered!');
+        </script>
+<?php
+    }
+}
+?>

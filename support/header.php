@@ -99,13 +99,19 @@ require_once("connection/connection.php");
 									<a href="index.php" class="nav-item nav-link home " id="home" onclick="activeLink('home')">Home
 										<hr class="hrhome">
 									</a>
-									<a href="online_application_home.php" class="nav-item nav-link forms" id="forms" onclick="activeLink('forms')">Online Application
-										<hr class="hrforms">
-									</a>
 									<?php
 									if (isset($_SESSION['TYPE'])) {
-										if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') {
+										if ($_SESSION['TYPE'] == '0') {
 									?>
+											<a href="online_application_home.php" class="nav-item nav-link forms" id="forms" onclick="activeLink('forms')">Online Application
+												<hr class="hrforms">
+											</a>
+										<?php
+										}
+									}
+									if (isset($_SESSION['TYPE'])) {
+										if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') {
+										?>
 											<a href="dashboard.php" class="nav-item nav-link dashboard" id="dashboard" onclick="activeLink('dashboard')">Dashboard
 												<hr class="hrdashboard">
 											</a>
