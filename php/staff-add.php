@@ -17,11 +17,11 @@ if ($_POST['id'] == "insert") {
     $encPassword = md5($password);
 
     $to = $email;
-    $mailSubject =  "Secretary Divisions Account Created..";
+    $mailSubject =  "PCD Staff Account Created..";
     $emailBody = "Your <b>Username :</b> $email <br>";
     $emailBody .= "Your <b>Password :</b> $password <br>Thank You !";
 
-    $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+    $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
     $sen = mail($to, $mailSubject, $emailBody, $header);
 

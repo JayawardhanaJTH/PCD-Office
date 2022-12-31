@@ -45,7 +45,7 @@ if ($_POST['register']) {
                 Your <b>Username :</b> $email <br>
                 Your <b>Password :</b> $password <br>Thank You !";
 
-        $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
         if (mail($to, $mailSubject, $emailBody, $header)) {
 

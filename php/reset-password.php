@@ -48,7 +48,7 @@ if (isset($_POST['reset_btn'])) {
         $encPass = md5($password);
         $emailBody = "Your password is rested! use this for login.\n\nPassword: " . $password;
 
-        if (mail($sanitized_email, $subject, $emailBody, "From: secraterywththala@gmail.com")) {
+        if (mail($sanitized_email, $subject, $emailBody, "From: pcdsecretaryoffice@gmail.com")) {
 
             //update database
             $updateUserPasswordQuery = "UPDATE people SET password='$encPass' WHERE pid = '$userId'";

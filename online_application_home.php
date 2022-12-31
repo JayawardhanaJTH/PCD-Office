@@ -68,22 +68,16 @@ include "support/header.php";
                             $result2 = mysqli_query($conn, $sql2);
                             $cat = mysqli_fetch_assoc($result2);
 
-                            $grama = $obj['grama_niladhari_approval'];
-                            $sec = $obj['secretary_approval'];
-                            $g_status = "Not Approved";
-                            $s_status = "Not Approved";
+                            $approval = $obj['approval'];
 
-                            if ($grama == '1') {
-                                $g_status = "Approved";
-                            } else if ($grama == '3') {
-                                $g_status = "Rejected";
+                            $status = "Not Approved";
+
+                            if ($approval == '1') {
+                                $status = "Approved";
+                            } else if ($approval == '3') {
+                                $status = "Rejected";
                             }
 
-                            if ($sec == '1') {
-                                $s_status = "Approved";
-                            } else if ($sec == '3') {
-                                $s_status = "Rejected";
-                            }
                         ?>
                             <div class="col-md-6 col-sm-12 mb-3">
                                 <a href="view_application.php?id=<?php echo $obj['applicationId'] ?>">
@@ -93,8 +87,7 @@ include "support/header.php";
                                         </div>
                                         <div class="card-body">
                                             <div class="details">
-                                                <p>Status : Grama Niladhari - <?php echo $g_status ?></p>
-                                                <p>Status : Secretary - <?php echo $s_status ?></p>
+                                                <p>Status : <?php echo $status ?></p>
                                             </div>
                                         </div>
                                     </div>
