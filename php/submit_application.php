@@ -4,10 +4,10 @@ require_once("../connection/connection.php");
 $form_id =  $_GET['id'];
 $submit_status = $_GET['status'];
 $user_type = $_SESSION['TYPE'];
-
+$comment = $_GET['comment'];
 
 $status = '3';
-if ($submit_status == 'true') {
+if ($submit_status == 'Approve') {
     $status = '1';
 }
 
@@ -26,9 +26,6 @@ $user = mysqli_fetch_assoc($result2);
 $username = $user['first_name'] . " " . $user['last_name'];
 $email = $user['email'];
 
-$sql = "UPDATE application SET approval = '$status' WHERE applicationId ='$form_id'";
-mysqli_query($conn, $sql);
-
 $code = $application['reason'];
 
 $sql3 = "SELECT categoryName FROM application_category WHERE categoryCode = '$code'";
@@ -37,7 +34,7 @@ $cat = mysqli_fetch_assoc($result3);
 
 $date = date('Y-m-d h:i:sa');
 $name = $_SESSION['username'];
-$sql = "UPDATE application SET approved_sign = '$name',approved_date='$date' WHERE applicationId ='$form_id'";
+$sql = "UPDATE application SET approval = '$status', approved_sign = '$name',approved_date='$date', comment = '$comment' WHERE applicationId ='$form_id'";
 mysqli_query($conn, $sql);
 
 if ($status == '1') {

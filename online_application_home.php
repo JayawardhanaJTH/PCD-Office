@@ -88,6 +88,7 @@ include "support/header.php";
                                         <div class="card-body">
                                             <div class="details">
                                                 <p>Status : <?php echo $status ?></p>
+                                                <p>Submitted Date : <?php echo $obj['date'] ?></p>
                                             </div>
                                         </div>
                                     </div>

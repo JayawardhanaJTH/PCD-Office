@@ -205,13 +205,30 @@ $data = mysqli_fetch_assoc($result);
 
         </form>
     </div>
+
     <?php
+    if ($data['approval'] == '1' || $data['approval'] == '3') {
+    ?>
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea name="comment" id="comment" class="form-control" disabled><?php echo $data['comment'] ?></textarea>
+        </div>
+    <?php
+    }
     if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2' && ($data['approval'] == '0')) {
     ?>
-        <div class="m-3 text-center">
-            <a href="php/submit_application.php?status=true&id=<?php echo $id ?>"><input type="submit" value="Approve" name="approve" id="approve" class="btn btn-success" style="background:green;"></a>
-            <a href="php/submit_application.php?status=false&id=<?php echo $id ?>"><input type="submit" value="Reject" name="reject" id="reject" class="btn btn-danger"></a>
-        </div>
+        <form action="php/submit_application.php " method=" post">
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea name="comment" id="comment" class="form-control" required></textarea>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <div class="m-3 text-center">
+                <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
+                <input type="submit" value="Reject" name="status" id="reject" class="btn btn-danger">
+            </div>
+        </form>
     <?php
     }
     ?>
