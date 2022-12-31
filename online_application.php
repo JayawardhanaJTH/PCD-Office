@@ -1,6 +1,7 @@
 <?php
 
 $page = "submitForms";
+$type = "form";
 setcookie("pageName", $page, time() + (86400 * 30), "/");
 
 include 'support/header.php';
@@ -11,7 +12,7 @@ include 'support/header.php';
             <h4 class="h4">පාර්ලිමේන්තු මන්ත්‍රී</h4>
             <h2 class="h2">නීතීඥ ප්‍රේමනාත් සී. දොලවත්ත මැතිතුමාගේ කාර්යාලය</h2>
         </div>
-        <form action="php/online_application_add.php" method="POST" onsubmit="return validateForm()" class="needs-validation" novalidate>
+        <form action="php/online_application_add.php" method="POST" class="needs-validation" novalidate>
             <ol>
                 <li>
                     <div class="form-group">
@@ -161,40 +162,45 @@ include 'support/header.php';
                         </div>
                     </li>
                 </div>
-                <li>
-                    <div class="form-group">
-                        <label for="referrer">Referred person</label>
-                        <label for="referrer">(යොමු කල පුද්ගලයා)</label>
-                        <input type="text" name="referrer" id="referrer" class="form-control" required>
-                        <div class="invalid-feedback">
-                            Please enter a name.
+                <div class="row mt-1">
+                    <li class="col-md-8">
+                        <div class="form-group">
+                            <label for="referrer">Referred person</label>
+                            <label for="referrer">(යොමු කල පුද්ගලයා)</label>
+                            <input type="text" name="referrer" id="referrer" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please enter a name.
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <?php
-                $category_sql = "SELECT * FROM application_category";
-                $result = mysqli_query($conn, $category_sql);
-                $dataSet = mysqli_fetch_all($result);
-                ?>
-                <li>
-                    <div class="form-group">
-                        <label for="reason">Reason</label>
-                        <label for="reason">(කාරණය)</label>
-                        <select name="reason" id="reason" class="form-control" required>
-                            <option value="">Select Reason</option>
-                            <?php
-                            if (count($dataSet) > 0) {
-                                foreach ($dataSet as $category) {
-                            ?>
-                                    <option value="<?php echo $category[2] ?>"><?php echo $category[1] ?></option>
-                            <?php
+                    </li>
+                    <?php
+                    $category_sql = "SELECT * FROM application_category";
+                    $result = mysqli_query($conn, $category_sql);
+                    $dataSet = mysqli_fetch_all($result);
+                    ?>
+                    <li class="col-md-4">
+                        <div class="form-group">
+                            <label for="reason">Reason</label>
+                            <label for="reason">(කාරණය)</label>
+                            <select name="reason" id="reason" class="form-control" required>
+                                <option value="">Select Reason</option>
+                                <?php
+                                if (count($dataSet) > 0) {
+                                    foreach ($dataSet as $category) {
+                                ?>
+                                        <option value="<?php echo $category[2] ?>"><?php echo $category[1] ?></option>
+                                <?php
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
 
-                        </select>
-                    </div>
-                </li>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a reason.
+                            </div>
+                        </div>
+                    </li>
+                </div>
                 <li>
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -231,20 +237,3 @@ include 'support/header.php';
 include 'support/footer.php';
 ?>
 <script src="js\online_application_add.js"></script>
-<script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>

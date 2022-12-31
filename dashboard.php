@@ -30,16 +30,16 @@ include "support/header.php";
 
 			<div class="card">
 				<div class="card-body">
-					<h1>Total income of this month</h1>
-					
+					<h1>Total registered peoples</h1>
+					<?php
+					$sql = "select count(*) as total from people";
+					$rs = mysqli_query($conn, $sql);
 
-				</div>
-			</div>
-
-			<div class="card">
-				<div class="card-body">
-					<h1>Total grama niladhari divisions</h1>
-					<h1>10</h1>
+					if ($row = mysqli_fetch_array($rs)) {
+						$total = $row["total"];
+						echo "<h5>Total registered : $total</h5>";
+					}
+					?>
 				</div>
 			</div>
 		</div>

@@ -35,17 +35,18 @@
 </div>
 <div class="wrapper row5">
 	<div id="copyright" class="hoc clear">
-		<p class="fl_left">Copyright &copy; 2020 - All Rights Reserved - <a href="#">PCDOffice</a></p>
+		<p class="fl_left">Copyright &copy; <?php echo date('Y') ?> - All Rights Reserved - <a href="index.php">PCDOffice</a></p>
 
 	</div>
 </div>
 <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
 
 <!-- JAVASCRIPTS -->
+<script src="layout/scripts/activeLinks.js"></script>
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery.backtotop.js"></script>
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/scroll.js"></script>
+<script src="layout/scripts/jquery.counterup.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -56,15 +57,40 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="js/event_add.js"></script>
 <script src="js/downloads_add.js"></script>
-<script src="js\popup_msgs.js"></script>
-<script src="layout\scripts\activeLinks.js"></script>
+<script src="js/popup_msgs.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
 
+<!-- animation script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <script>
-	var s = skrollr.init();
+	AOS.init();
 </script>
 
+<?php
+if (isset($type)) {
+?>
+	<script>
+		(function() {
+			'use strict';
+			window.addEventListener('load', function() {
+				var forms = document.getElementsByClassName('needs-validation');
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', function(event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+<?php
+}
+?>
 </body>
 
 </html>

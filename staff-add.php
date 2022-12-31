@@ -1,5 +1,7 @@
 <?php
 $page = "staff-add";
+$type = "form";
+
 include "support/header.php";
 ?>
 
@@ -11,7 +13,7 @@ include "support/header.php";
             </div>
             <div class="people-form p-2">
 
-                <form style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                <form method="POST" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <div class="input-group">
@@ -19,6 +21,9 @@ include "support/header.php";
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
                             <input class="form-control" type="text" id="firstName" name="firstName" placeholder="First name" required>
+                            <div class="invalid-feedback">
+                                Please select a reason.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -27,7 +32,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
-                            <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Last name">
+                            <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                            <div class="invalid-feedback">
+                                Please select a reason.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,7 +44,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
-                            <input class="form-control" type="text" id="username" name="username" placeholder="username">
+                            <input class="form-control" type="text" id="username" name="username" placeholder="username" required>
+                            <div class="invalid-feedback">
+                                Please select a reason.
+                            </div>
                         </div>
                     </div>
 
@@ -46,7 +57,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-at"></i></div>
                             </div>
-                            <input class="form-control" type="email" id="email" name="email" placeholder="Email">
+                            <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please select a reason.
+                            </div>
                         </div>
                     </div>
 
@@ -55,11 +69,14 @@ include "support/header.php";
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-user"></i></div>
                             <div class="input-group">
-                                <select id="gender" class="form-control">
+                                <select id="gender" class="form-control" required>
                                     <option value="">Select Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Please select a reason.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,7 +86,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-id-card"></i></div>
                             </div>
-                            <input type="text" id="nic" name="nic" class="form-control" placeholder="123456789V">
+                            <input type="text" id="nic" name="nic" maxlength='10' minlength='10' pattern="[0-9]{9}[A-Z|a-z]{1}" class="form-control" placeholder="123456789V" required>
+                            <div class="invalid-feedback">
+                                Please enter valid NIC number.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -79,7 +99,6 @@ include "support/header.php";
                                 <div class="input-group-text"><i class="fas fa-phone"></i></div>
                             </div>
                             <input type="tel" id="contactNumber" name="contactNumber" minlength="10" maxlength="10" pattern="[0-9]{10}" class="form-control" placeholder="079123456" required>
-
                             <div class="invalid-feedback">
                                 Please enter valid contact number between 0-9.
                             </div>
@@ -92,7 +111,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="Address">
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please enter address.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,7 +123,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-key"></i></div>
                             </div>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" disabled>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" readonly required>
+                            <div class="invalid-feedback" id="err-password" style="display: none;">
+                                Please generate a password.
+                            </div>
                             <div class="col-3">
                                 <input type="button" class="btn form-control" value="Generate" onClick="randomPassword(10);" tabindex="2">
                             </div>
@@ -109,7 +134,7 @@ include "support/header.php";
                     </div>
                     <br>
                     <div>
-                        <input type="button" class="btn" id="add_staff" value="Add Staff">
+                        <input type="submit" class="btn" id="add_staff" value="Add Staff">
                     </div>
                 </form>
             </div>

@@ -1,6 +1,9 @@
 function randomPassword(length) {
   // alert("hi");
 
+  var password_input = document.getElementById("err-password");
+  password_input.style.removeProperty("display");
+
   var chars =
     "abch128kfjk%#@pkjkn189960!-_nojwfpovm872563209^@#@*&)_*YIF<:MF*%^#$@^(A<AAAAJFM vlaojfrk";
   var pass = "";
@@ -10,11 +13,10 @@ function randomPassword(length) {
   }
   if (document.getElementById("password")) {
     document.getElementById("password").value = pass;
-    console.log("element",pass)
-
+    console.log("element", pass);
   } else {
     document.cookie = "reset_pass = " + pass;
-    console.log("cookie",pass)
+    console.log("cookie", pass);
   }
   // alert(pass);
 }

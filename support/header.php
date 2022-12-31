@@ -51,10 +51,13 @@ require_once("connection/connection.php");
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
+	<!-- animation library -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 	<!-- CSS -->
 	<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 	<link href="layout/styles/Calender.css" rel="stylesheet" type="text/css" media="all">
+	<link href="layout/styles/framework.css" rel="stylesheet" type="text/css" media="all">
 
 </head>
 

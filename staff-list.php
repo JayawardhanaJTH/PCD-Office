@@ -1,5 +1,6 @@
 <?php
 $page = "staff-list";
+$type = "form";
 include "support/header.php";
 ?>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -141,20 +142,3 @@ include "support/footer.php";
 <script src="js/staff-add.js"></script>
 <script src="js/staff-update.js"></script>
 <script src="js/staff-delete.js"></script>
-<script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
