@@ -195,10 +195,10 @@ require_once("connection/connection.php");
 			</div>
 			<div id="searchform" class="col-md-6">
 				<div style="border: 2px solid white; border-radius: 4px;" class="mt-2 mb-2">
-					<form action="../php/search.php" method="post">
+					<form action="searchForm.php" method="post">
 						<fieldset>
 							<legend>Quick Search:</legend>
-							<input class="text-white" type="text" name="searchText" placeholder="Enter search term&hellip;">
+							<input class="text-white" type="text" name="searchText" id="searchText" placeholder="Enter search term&hellip;">
 							<button type="submit"><i class="fas fa-search"></i></button>
 						</fieldset>
 					</form>
