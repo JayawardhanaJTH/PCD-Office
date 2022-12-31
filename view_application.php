@@ -215,7 +215,7 @@ $data = mysqli_fetch_assoc($result);
         </div>
     <?php
     }
-    if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2' && ($data['approval'] == '0')) {
+    if (($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') && ($data['approval'] == '0')) {
     ?>
         <form action="php/submit_application.php " method=" post">
             <div class="form-group">
