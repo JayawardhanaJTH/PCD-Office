@@ -1,0 +1,117 @@
+@charset "utf-8";
+
+@import url("fontawesome-free/css/fontawesome-all.min.css");
+@import url("framework.css");
+
+.row.calender-cover.calender {
+  font-family: sans-serif;
+}
+.month {
+  width: 100%;
+  height: 12rem;
+  color: white;
+  background: rgb(67, 129, 5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.month .days {
+  text-align: center;
+}
+
+.month .days h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+}
+
+.month .days p {
+  letter-spacing: 0.2rem;
+  font-weight: 400;
+}
+
+.month i {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.weekdays {
+  width: auto;
+  height: 3rem;
+  display: flex;
+  padding: 0.2rem;
+  align-items: center;
+}
+.weekdays div {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  width: calc(100% / 7);
+  height: 2rem;
+  letter-spacing: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.2rem;
+}
+.day div {
+  margin: auto;
+  width: calc(100% / 7);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.day a {
+  margin: auto;
+  width: calc(100% / 7);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  text-decoration: none;
+}
+
+.day div:hover:not(.today) {
+  border: 0.2rem solid black;
+  background-color: rgb(219, 219, 219);
+}
+.pre-day,
+.next-day {
+  color: rgb(212, 30, 45);
+}
+.today {
+  background-color: darkgreen;
+  color: white;
+}
+
+@media screen and (max-width: 1440px) {
+  .day {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .day {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .day div {
+    width: calc(20rem / 7);
+  }
+}

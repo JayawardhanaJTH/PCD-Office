@@ -1,0 +1,175 @@
+.status{
+    padding: 1em;
+}
+.status .card-deck .card{
+    border: ivory;
+    border-radius: 20px;
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.5),  
+                2px -2px 0 rgba(255, 255, 255, 0.9);
+}
+.status .card-deck .card .card-body{
+    color: black;
+    text-align: center;
+    animation: circle3 0.2s ease-out;
+}
+@keyframes circle3{
+    100%{
+        clip-path: circle(10% at 0% 0%);
+    }
+    80%{
+        clip-path: circle(20% at 0% 0%);
+    }
+    60%{
+        clip-path: circle(30% at 0% 0%);
+    }
+    40%{
+        clip-path: circle(40% at 0% 0%);
+    }
+    20%{
+        clip-path: circle(50% at 0% 0%);
+    }
+    10%{
+        clip-path: circle(60% at 0% 0%);
+    }
+    0%{
+        clip-path: circle(70% at 0% 0%);
+    }
+}
+.status .card-deck .card .card-body h1{
+    font-family: sans-serif;
+}
+
+.status .card-deck .card:hover .card-body{
+    background-color: #95103B;
+    color: white;
+    border-radius: 20px;
+    animation: circle1 0.2s ease-out;
+}
+@keyframes circle1{
+    0%{
+        clip-path: circle(10% at 0% 0%);
+    }
+    20%{
+        clip-path: circle(20% at 0% 0%);
+    }
+    40%{
+        clip-path: circle(30% at 0% 0%);
+    }
+    50%{
+        clip-path: circle(40% at 0% 0%);
+    }
+    60%{
+        clip-path: circle(50% at 0% 0%);
+    }
+    80%{
+        clip-path: circle(60% at 0% 0%);
+    }
+    100%{
+        clip-path: circle(70% at 0% 0%);
+    }
+}
+.dash{
+    background-color: rgba(0, 0, 0, 0.685);
+    border:  rgba(0, 25, 20, 0.2);
+    border-radius: 10px;
+    margin: 2em;
+}
+.topic{
+    text-align: center;
+}
+.topic h1{
+    padding: 1em;
+    font-size: 2em;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.panel{
+    margin: 1em;
+    padding: 1em;
+    background-color: rgba(231, 229, 229, 0.87);
+    border:  rgba(0, 25, 20, 0.2);
+    border-radius: 10px;
+}
+
+.panel a{
+    color: black;
+    text-decoration: none;
+}
+.card{
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.329);
+    transition: ease-in 0.5s;
+}
+
+.card:hover{
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+    border: none;
+    background-color: #928f9041;
+    clip-path: polygon(40% 0, 100% 0%, 100% 100%, 40% 100%, 20% 50%);
+    transition:ease-in 0.4s ;
+}
+
+.card-body{
+    transition:ease-in 0.2s ;
+}
+.card:hover .card-header{
+    clip-path: polygon(0% 0%, 60% 0%, 80% 50%, 60% 100%, 0% 100%);
+    background-color: #95103B;
+    color: white;
+}
+
+.card:hover .card-body{
+    background-color: #95103B;
+    color: white;
+    animation: circle2 0.4s ease-in;
+}
+
+@keyframes circle2{
+    0%{
+        clip-path: circle(10% at 50% 50%);
+    }
+    20%{
+        clip-path: circle(20% at 50% 50%);
+    }
+    40%{
+        clip-path: circle(30% at 50% 50%);
+    }
+    50%{
+        clip-path: circle(40% at 50% 50%);
+    }
+    60%{
+        clip-path: circle(50% at 50% 50%);
+    }
+    80%{
+        clip-path: circle(60% at 50% 50%);
+    }
+    100%{
+        clip-path: circle(80% at 50% 50%);
+    }
+}
+
+/* people_details.php styles */
+
+.p_button{
+    background-color: saddlebrown;
+    padding: 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.p_box .card-deck .card:hover a{
+    text-decoration: none;
+    font-weight: bolder;
+}
+.p_box .card-deck .card:hover .p_button{
+    font-weight: bold;
+    font-weight: 500;
+    color: black;
+    background-color: rgb(255, 255, 255);
+}
+.card-img{
+    opacity: 0.2;
+    display: block;
+}
