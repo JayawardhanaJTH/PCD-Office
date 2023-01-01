@@ -55,8 +55,6 @@ function showPassword() {
 
 function ValidateEmail(email) {
   var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g;
-  console.log(email);
-  console.log(email.match(mailFormat));
   if (email.match(mailFormat)) {
     return true;
   } else {

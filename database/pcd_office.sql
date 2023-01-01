@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2022 at 06:51 PM
+-- Generation Time: Jan 01, 2023 at 03:40 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,20 +47,12 @@ CREATE TABLE `application` (
   `regionalDivision` varchar(200) CHARACTER SET latin1 NOT NULL,
   `reason` varchar(200) NOT NULL,
   `description` varchar(5000) NOT NULL,
-  `grama_niladhari_approval` int(11) DEFAULT 0,
-  `secretary_approval` int(11) DEFAULT 0,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `approval` int(11) DEFAULT 0,
   `approved_date` datetime DEFAULT NULL,
-  `grama_niladhari_sign` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `secretary_sign` varchar(200) CHARACTER SET latin1 DEFAULT NULL
+  `approved_sign` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
+  `comment` varchar(5000) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `application`
---
-
-INSERT INTO `application` (`applicationId`, `applicationNo`, `applicantName`, `nic`, `address`, `birthday`, `maritalStatus`, `childAbove18`, `childBelow18`, `contact`, `electoralSeat`, `referredPerson`, `villageDomain`, `regionalDivision`, `reason`, `description`, `grama_niladhari_approval`, `secretary_approval`, `date`, `approved_date`, `grama_niladhari_sign`, `secretary_sign`) VALUES
-(28, 'PCD/KE/SC/22/12/29/1', 'Test', '111111111G', 'test address', '2022-12-16', b'1', 1, 1, '1111111111', 'KE', 'test', 'aa', 'Kotte', 'SC', ' test', 0, 0, '2022-12-29 23:20:19', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,17 +117,11 @@ CREATE TABLE `people` (
   `email` varchar(50) NOT NULL,
   `contact` varchar(11) NOT NULL,
   `nic` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
   `password` varchar(50) NOT NULL,
   `electoralseat` varchar(200) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `people`
---
-
-INSERT INTO `people` (`peopleId`, `firstname`, `lastname`, `username`, `email`, `contact`, `nic`, `password`, `electoralseat`, `date`) VALUES
-(1, 'People', 'people123@', 'People', 'tiranharsha2323@gmail.com', '761234567', '962841180V', 'dd019d2558f6e70837033950dbfe587a', '', '2021-03-10 21:21:01');
 
 -- --------------------------------------------------------
 
@@ -163,8 +149,7 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`staffId`, `firstName`, `lastName`, `email`, `username`, `gender`, `contactNumber`, `nic`, `address`, `password`, `type`) VALUES
-(1, 'samantha', 'samantha123@', 'samantha@gmail.com', 'Admin', 'male', '2147483647', '', '12379', '75be1117cc1397ecea7fec6440f9e9c2', 1),
-(2, 'Staff', 'staff123@', 'tiran2323@gmail.com', 'Staff', 'male', '2147483647', '', 'Deepthi', '2d6daf8be267352db0a04a5c26002bb3', 2);
+(1, 'samantha', 'samantha123@', 'samantha@gmail.com', 'Admin', 'male', '2147483647', '', '12379', '75be1117cc1397ecea7fec6440f9e9c2', 1);
 
 --
 -- Indexes for dumped tables
@@ -208,7 +193,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `applicationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `applicationId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `application_category`
@@ -226,13 +211,13 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `peopleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `peopleId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staffId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `staffId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -20,7 +20,7 @@ include "support/header.php";
                             </p>
                             <div>
                                 <?php
-                                $sql = "select count(*) as total from staff";
+                                $sql = "select count(*) as total from staff where type = 2";
                                 $rs = mysqli_query($conn, $sql);
 
                                 if ($row = mysqli_fetch_array($rs)) {
@@ -81,7 +81,7 @@ include "support/header.php";
                 </div>
             </div>
             <div class="card m-2 overflow-hidden">
-                
+
             </div>
 
         </div>

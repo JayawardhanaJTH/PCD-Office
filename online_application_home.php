@@ -36,9 +36,9 @@ include "support/header.php";
     <!-- load data  -->
     <?php
     if ($_SESSION['TYPE'] == '0') {
-        $id = $_SESSION['USER_ID'];
+        $id = $_SESSION['USER_NIC'];
 
-        $sql1  = "SELECT * FROM application WHERE peopleId= '$id'";
+        $sql1  = "SELECT * FROM application WHERE nic= '$id'";
 
         $result_application = mysqli_query($conn, $sql1);
 
@@ -62,33 +62,33 @@ include "support/header.php";
                         <?php
                     } else {
                         foreach ($application as $obj) {
-                            $grama = $obj['grama_niladhari_approval'];
-                            $sec = $obj['secretary_approval'];
-                            $g_status = "Not Approved";
-                            $s_status = "Not Approved";
+                            $code = $obj['reason'];
 
-                            if ($grama == '1') {
-                                $g_status = "Approved";
-                            } else if ($grama == '3') {
-                                $g_status = "Rejected";
+                            $sql2 = "SELECT categoryName FROM application_category WHERE categoryCode = '$code'";
+                            $result2 = mysqli_query($conn, $sql2);
+                            $cat = mysqli_fetch_assoc($result2);
+
+                            $approval = $obj['approval'];
+
+                            $status = "Not Approved";
+
+                            if ($approval == '1') {
+                                $status = "Approved";
+                            } else if ($approval == '3') {
+                                $status = "Rejected";
                             }
 
-                            if ($sec == '1') {
-                                $s_status = "Approved";
-                            } else if ($sec == '3') {
-                                $s_status = "Rejected";
-                            }
                         ?>
                             <div class="col-md-6 col-sm-12 mb-3">
-                                <a href="view_application1.php?id=<?php echo $obj['f_id'] ?>">
+                                <a href="view_application.php?id=<?php echo $obj['applicationId'] ?>">
                                     <div class="card">
                                         <div class="text-center">
-                                            <h1>Application Type : Business Registration</h1>
+                                            <h1>Application Type : <?php echo $cat['categoryName'] ?></h1>
                                         </div>
                                         <div class="card-body">
                                             <div class="details">
-                                                <p>Status : Grama Niladhari - <?php echo $g_status ?></p>
-                                                <p>Status : Secretary - <?php echo $s_status ?></p>
+                                                <p>Status : <?php echo $status ?></p>
+                                                <p>Submitted Date : <?php echo $obj['date'] ?></p>
                                             </div>
                                         </div>
                                     </div>

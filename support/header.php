@@ -51,10 +51,13 @@ require_once("connection/connection.php");
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
+	<!-- animation library -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 	<!-- CSS -->
 	<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 	<link href="layout/styles/Calender.css" rel="stylesheet" type="text/css" media="all">
+	<link href="layout/styles/framework.css" rel="stylesheet" type="text/css" media="all">
 
 </head>
 
@@ -96,13 +99,19 @@ require_once("connection/connection.php");
 									<a href="index.php" class="nav-item nav-link home " id="home" onclick="activeLink('home')">Home
 										<hr class="hrhome">
 									</a>
-									<a href="online_application_home.php" class="nav-item nav-link forms" id="forms" onclick="activeLink('forms')">Online Application
-										<hr class="hrforms">
-									</a>
 									<?php
 									if (isset($_SESSION['TYPE'])) {
-										if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') {
+										if ($_SESSION['TYPE'] == '0') {
 									?>
+											<a href="online_application_home.php" class="nav-item nav-link forms" id="forms" onclick="activeLink('forms')">Online Application
+												<hr class="hrforms">
+											</a>
+										<?php
+										}
+									}
+									if (isset($_SESSION['TYPE'])) {
+										if ($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') {
+										?>
 											<a href="dashboard.php" class="nav-item nav-link dashboard" id="dashboard" onclick="activeLink('dashboard')">Dashboard
 												<hr class="hrdashboard">
 											</a>
@@ -186,10 +195,10 @@ require_once("connection/connection.php");
 			</div>
 			<div id="searchform" class="col-md-6">
 				<div style="border: 2px solid white; border-radius: 4px;" class="mt-2 mb-2">
-					<form action="../php/search.php" method="post">
+					<form action="searchForm.php" method="post">
 						<fieldset>
 							<legend>Quick Search:</legend>
-							<input class="text-white" type="text" name="searchText" placeholder="Enter search term&hellip;">
+							<input class="text-white" type="text" name="searchText" id="searchText" placeholder="Enter search term&hellip;">
 							<button type="submit"><i class="fas fa-search"></i></button>
 						</fieldset>
 					</form>

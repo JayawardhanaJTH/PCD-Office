@@ -40,11 +40,11 @@ include 'support/header.php';
 	<main class="hoc container clear">
 		<!-- main body -->
 		<div class="sectiontitle">
-			<h1 class="text-gray-dark font-x3 font-weight-bold" style="border-bottom: 2px solid #911105; font-family: sans-serif;" data-center-center="opacity:1;left:0;" data-0-bottom="opacity:0;left:-500px;">Our Services</h1>
+			<h1 class="text-gray-dark font-x3 font-weight-bold" style="border-bottom: 2px solid #911105; font-family: sans-serif;" data-aos="fade-left">Our Services</h1>
 		</div>
 		<div class="group center btmspace-80">
 			<!-- First line -->
-			<div class="row service1">
+			<div class="row service1" data-aos="zoom-in-up">
 				<div class="col-md-6 justify-content-center">
 					<article><a class="ringcon btmspace-50" href="our_works.php"><i class="fas fa-user-cog"></i></a>
 						<h6 class="heading">Our works</h6>
@@ -61,7 +61,7 @@ include 'support/header.php';
 
 			<br>
 			<!-- Second line -->
-			<div class="row service1 justify-content-center">
+			<div class="row service1 justify-content-center" data-aos="zoom-in-up">
 				<!-- <div class="col-md-6 justify-content-center">
 					<article class="first"><a class="ringcon btmspace-50" href="downloads.php"><i class="fas fa-download"></i></a>
 						<h6 class="heading">Download application</h6>
@@ -82,7 +82,7 @@ include 'support/header.php';
 </div>
 <!-- Latest news -->
 <div class="wrapper row2 latest">
-	<section class="hoc container clear">
+	<section class="hoc container clear" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
 		<div>
 			<h1 id="latestNews" class="text-gray-dark font-weight-bold font-x3">Latest news</h1>
 		</div>
@@ -126,41 +126,7 @@ include 'support/header.php';
 				</div>
 			</div>
 
-			<!-- <div class="card">
-					<div class="post-image">
-						<a href="#"><img class="card-img-top" src="images/carosal3.jpg"></a>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">Title</h5>
-						<p class="card-text">Body</p>
 
-						<ul style="list-style: none;">
-							<li><i class="fa fa-calendar"></i> June 6, 2020</li>
-							<li><i class="fa fa-pencil-alt"></i> Admin</li>
-						</ul>
-					</div>
-					<div class="card-footer">
-						<a href="#">Read more <i class="fas fa-arrow-circle-right"></i></a> 
-					</div>
-				</div> -->
-
-			<!-- <div class="card">
-					<div class="post-image">
-						<a href="#"><img class="card-img-top" src="images/carosal4.jpg"></a>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">Title</h5>
-						<p class="card-text">Body</p>
-
-						<ul style="list-style: none;">
-							<li><i class="fa fa-calendar"></i> June 6, 2020</li>
-							<li><i class="fa fa-pencil-alt"></i> Admin</li>
-						</ul>
-					</div>
-					<div class="card-footer">
-						<a href="#">Read more <i class="fas fa-arrow-circle-right"></i></a> 
-					</div>
-				</div> -->
 		</div>
 		<br>
 		<br>

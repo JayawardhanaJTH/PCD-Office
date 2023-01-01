@@ -1,5 +1,6 @@
 <?php
 $page = "register";
+$type = "form";
 include "support/header.php";
 ?>
 <div class="container-fluid p-3">
@@ -82,6 +83,18 @@ include "support/header.php";
                             <input type="text" id="nic" name="nic" maxlength='10' minlength='10' pattern='[0-9]{9}[A-Z|a-z]{1}' class="form-control" placeholder="123456789V" required>
                             <div class="invalid-feedback">
                                 Please enter valid NIC number.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please enter address.
                             </div>
                         </div>
                     </div>
@@ -179,20 +192,18 @@ if (isset($_SESSION["REGISTERED"])) {
     }
 }
 ?>
-<script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+
+<?php
+
+if (isset($_SESSION['EMAIL_USED'])) {
+    if ($_SESSION['EMAIL_USED']) {
+        unset($_SESSION["EMAIL_USED"]);
+
+?>
+        <script type="text/javascript">
+            error_popup('The email is already registered!');
+        </script>
+<?php
+    }
+}
+?>

@@ -14,28 +14,29 @@ if ($_POST['register']) {
     $password = $_POST['password'];
     $rePassword = $_POST['repassword'];
     $elecSeat = $_POST['elecSeat'];
+    $address = $_POST['address'];
 
     $encPass = md5($password);
 
-    $sql = "INSERT INTO user(firstname, lastname, username, email, contact, nic, password, electoralseat) 
-            VALUES ('$firstname', '$lastname', '$username' , '$email', '$phone', '$nic' , '$encPass' ,'$elecSeat')";
+    //check the email is already used
+    $query = "SELECT peopleId FROM people WHERE email='$email'";
+
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) != 0) {
+        $_SESSION['EMAIL_USED'] = true;
+        session_write_close();
+
+        header("location: ../register.php");
+        exit();
+    }
+
+    $sql = "INSERT INTO people(firstname, lastname, username, email, contact, nic, password, electoralseat, address) 
+            VALUES ('$firstname', '$lastname', '$username' , '$email', '$phone', '$nic' , '$encPass' ,'$elecSeat', '$address')";
 
 
 
     if (mysqli_query($conn, $sql)) {
-
-        //get inserted user
-        $query = "SELECT * FROM user WHERE email='$email' AND password='$encPass'";
-
-        $result = mysqli_query($conn, $query);
-        $user = mysqli_fetch_assoc($result);
-
-        $id = $user['id'];
-
-        $sql2 = "INSERT INTO user_login(id,username, email, password, type) 
-                    VALUES ('$id','$username','$email','$encPass','2')";
-
-        mysqli_query($conn, $sql2);
 
         $to = $email;
         $mailSubject =  "PCD Office Account Created..";
@@ -44,7 +45,7 @@ if ($_POST['register']) {
                 Your <b>Username :</b> $email <br>
                 Your <b>Password :</b> $password <br>Thank You !";
 
-        $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
         if (mail($to, $mailSubject, $emailBody, $header)) {
 

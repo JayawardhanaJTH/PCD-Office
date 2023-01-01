@@ -1,5 +1,6 @@
 <?php
 $page = "staff-list";
+$type = "form";
 include "support/header.php";
 ?>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -38,6 +39,9 @@ include "support/header.php";
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
                             <input class="form-control" type="text" id="update_first_name" name="update_first_name" placeholder="First name" required>
+                            <div class="invalid-feedback">
+                                Please enter first name.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -46,7 +50,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
-                            <input class="form-control" type="text" id="update_last_name" name="update_last_name" placeholder="Last name">
+                            <input class="form-control" type="text" id="update_last_name" name="update_last_name" placeholder="Last name" required>
+                            <div class="invalid-feedback">
+                                Please enter last name.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +62,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
-                            <input class="form-control" type="text" id="update_username" name="update_username" placeholder="username">
+                            <input class="form-control" type="text" id="update_username" name="update_username" placeholder="username" required>
+                            <div class="invalid-feedback">
+                                Please enter username.
+                            </div>
                         </div>
                     </div>
 
@@ -65,7 +75,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-at"></i></div>
                             </div>
-                            <input class="form-control" type="email" id="update_email" name="update_email" placeholder="Email">
+                            <input class="form-control" type="email" id="update_email" name="update_email" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please enter valid email.
+                            </div>
                         </div>
                     </div>
 
@@ -74,11 +87,14 @@ include "support/header.php";
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-user"></i></div>
                             <div class="input-group">
-                                <select id="update_gender" class="form-control">
+                                <select id="update_gender" class="form-control" required>
                                     <option value="">Select Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Please select a gender.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,7 +104,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-id-card"></i></div>
                             </div>
-                            <input type="text" id="update_nic" name="update_nic" class="form-control" placeholder="123456789V">
+                            <input type="text" id="update_nic" name="update_nic" maxlength="10" minlength="10" pattern="[0-9]{9}[A-Z|a-z]{1}" class="form-control" placeholder="123456789V" required>
+                            <div class="invalid-feedback">
+                                Please valid NIC number.
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -111,7 +130,10 @@ include "support/header.php";
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="text" id="update_address" name="update_address" class="form-control" placeholder="Address">
+                            <input type="text" id="update_address" name="update_address" class="form-control" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please enter address.
+                            </div>
                         </div>
                     </div>
 
@@ -141,20 +163,3 @@ include "support/footer.php";
 <script src="js/staff-add.js"></script>
 <script src="js/staff-update.js"></script>
 <script src="js/staff-delete.js"></script>
-<script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>

@@ -25,7 +25,7 @@ function delete_staff(staffId) {
                             'Your file has been deleted.',
                             'success'
                         )
-                        people_load();
+                        staff_load();
                     }
                 },
                 error: function (request, error) {
