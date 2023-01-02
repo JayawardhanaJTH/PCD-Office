@@ -52,48 +52,30 @@ include "support/header.php";
 
 <!--reach section-->
 <section class="project p-5" style="background-color: #f4f4f4">
-    <div class="container text-center p-3 mb-">
-        <div class="text-center">
-            <h1 class="mb-3" style="font-weight: bold">Our reach</h1>
-            <div class="row mb-5">
-                <div class="col-2">
-                </div>
-                <div class="col-8">
-                    <p></p>
-                </div>
-                <div class="col-">
-                </div>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-sm-3 col-12">
+    <div class="container text-center p-1">
+        <div class="row">
+            <div class="col-sm-4 col-12">
                 <div>
                     <i class="fas fa-users mb-4" style="color: #95103b; font-size: 3rem"></i><br>
-                    <span class="count" style="font-size: 1.5rem; font-weight: bold">1500</span><span style="font-size: 1.5rem; font-weight: bold">k</span>
+                    <span class="count" style="font-size: 1.5rem; font-weight: bold">15</span><span style="font-size: 1.5rem; font-weight: bold">K</span>
                     <p class="mt-2" style="font-size: 1.5rem;">Members</p>
                 </div>
             </div>
-            <div class="col-sm-3 col-12">
+            <div class="col-sm-4 col-12">
                 <div>
                     <i class="fas fas fa-building mb-4" style="color: #95103b; font-size: 3rem"></i><br>
-                    <span class="count" style="font-size: 1.5rem; font-weight: bold">10</span><span style="font-size: 1.5rem; font-weight: bold">k</span>
-                    <p class="mt-2" style="font-size: 1.5rem;">Office</p>
+                    <span class="count" style="font-size: 1.5rem; font-weight: bold">13</span>
+                    <p class="mt-2" style="font-size: 1.5rem;">Secretary Divisions</p>
                 </div>
             </div>
-            <div class="col-sm-3 col-12">
+            <div class="col-sm-4 col-12">
                 <div>
                     <i class="fas fa-user-friends mb-4" style="color: #95103b; font-size: 3rem"></i><br>
-                    <span class="count" style="font-size: 1.5rem; font-weight: bold">100</span><span style="font-size: 1.5rem; font-weight: bold">k</span>
-                    <p class="mt-2" style="font-size: 1.5rem;">Grama Niladhari</p>
+                    <span class="count" style="font-size: 1.5rem; font-weight: bold">557</span>
+                    <p class="mt-2" style="font-size: 1.5rem;">Village Officer Domains</p>
                 </div>
             </div>
-            <div class="col-sm-3 col-12">
-                <div>
-                    <i class="fas fa-award mb-4" style="color: #95103b; font-size: 3rem"></i><br>
-                    <span class="count" style="font-size: 1.5rem; font-weight: bold">60</span><span style="font-size: 1.5rem; font-weight: bold">k</span>
-                    <p class="mt-2" style="font-size: 1.5rem;">Awards</p>
-                </div>
-            </div>
+
         </div>
 
     </div>
