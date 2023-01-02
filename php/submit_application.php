@@ -52,7 +52,7 @@ if ($status == '1') {
     $to = $email;
     $mailSubject =  $cat['categoryName'] . " Application Rejected.";
     $emailBody = "Dear <b> " . $application['applicantName'] . "</b> your Application (" . ($application['applicationNo']) . ") is Rejected. <br>
-                Please contact PCD Office For more details. <br>
+                Please contact PCD Office (011-2142882) For more details. <br>
                 <br>Thank You !";
 
     $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";

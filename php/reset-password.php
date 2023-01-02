@@ -18,7 +18,7 @@ if (isset($_POST['reset_btn'])) {
     }
 
     $sanitized_email = mysqli_escape_string($conn, $email);
-    $statement = mysqli_prepare($conn, "SELECT pid FROM people WHERE email = ?");
+    $statement = mysqli_prepare($conn, "SELECT peopleId FROM people WHERE email = ?");
 
     mysqli_stmt_bind_param($statement, 's', $sanitized_email);
     mysqli_stmt_execute($statement);
@@ -51,7 +51,7 @@ if (isset($_POST['reset_btn'])) {
         if (mail($sanitized_email, $subject, $emailBody, "From: pcdsecretaryoffice@gmail.com")) {
 
             //update database
-            $updateUserPasswordQuery = "UPDATE people SET password='$encPass' WHERE pid = '$userId'";
+            $updateUserPasswordQuery = "UPDATE people SET password='$encPass' WHERE peopleId = '$userId'";
             mysqli_query($conn, $updateUserPasswordQuery);
 
             $_SESSION['reset_password_send'] = true;

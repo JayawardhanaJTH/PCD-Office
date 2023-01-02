@@ -116,7 +116,7 @@ include 'support/header.php';
 		$years = array();
 		$ids = array();
 
-		$sql = "SELECT * FROM events LIMIT 5";
+		$sql = "SELECT * FROM events WHERE e_postDate LIKE '%" . date('Y') . "%' LIMIT 5";
 
 		$result = mysqli_query($conn, $sql);
 

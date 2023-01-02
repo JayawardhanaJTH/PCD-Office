@@ -81,7 +81,7 @@ $("#add_staff").click(function () {
             timer: 2500,
           });
 
-          window.location.href = "staff-list.php";
+          window.location.href = "staff-list.php?viewType=view";
           staff_load();
         } else {
           Swal.fire({
@@ -99,8 +99,8 @@ $("#add_staff").click(function () {
   }
 });
 
-function staff_load() {
-  var id = "show";
+function staff_load(viewType) {
+  var id = viewType;
 
   $.ajax({
     url: "php/staff-add.php",
@@ -117,7 +117,8 @@ function staff_load() {
 }
 
 $(document).ready(function () {
-  staff_load();
+  var viewType = document.getElementById("viewType").value;
+  staff_load(viewType);
 });
 
 function ValidateEmail(email) {
