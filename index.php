@@ -61,81 +61,25 @@ include 'support/header.php';
 
 			<br>
 			<!-- Second line -->
-			<div class="row service1 justify-content-center" data-aos="zoom-in-up">
-				<!-- <div class="col-md-6 justify-content-center">
-					<article class="first"><a class="ringcon btmspace-50" href="downloads.php"><i class="fas fa-download"></i></a>
-						<h6 class="heading">Download application</h6>
-						<p>Here are all applications</p>
-					</article>
-				</div> -->
-				<div class="col-md-6">
-					<article><a class="ringcon btmspace-50" href="online_application_home.php"><i class="fas fa-file-invoice"></i></a>
-						<h6 class="heading">Online application</h6>
-						<p>Here can submit applications</p>
-					</article>
+			<?php
+			if ($_SESSION["TYPE"] == 0) {
+			?>
+				<div class="row service1 justify-content-center" data-aos="zoom-in-up">
+					<div class="col-md-6">
+						<article><a class="ringcon btmspace-50" href="online_application_home.php"><i class="fas fa-file-invoice"></i></a>
+							<h6 class="heading">Online application</h6>
+							<p>Here can submit applications</p>
+						</article>
+					</div>
 				</div>
-			</div>
+			<?php
+			}
+			?>
 		</div>
 		<!-- / main body -->
 		<div class="clear"></div>
 	</main>
 </div>
-<!-- Latest news -->
-<div class="wrapper row2 latest">
-	<section class="hoc container clear" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
-		<div>
-			<h1 id="latestNews" class="text-gray-dark font-weight-bold font-x3">Latest news</h1>
-		</div>
-		<!-- News line -->
-		<div class="card-deck owl-carousel">
-			<div class="card">
-				<div class="post-image">
-					<img class="card-img-top" src="images/water_cut.jpeg">
-				</div>
-
-				<div class="card-body p-3">
-					<h5 class="card-title">Water cut</h5>
-					<p class="card-text">6 hour water cut for Wattala & surrounding areas</p>
-
-					<ul style="list-style: none;">
-						<li><i class="fa fa-calendar"></i> March 22, 2021</li>
-						<li><i class="fa fa-pencil-alt"></i> Admin</li>
-					</ul>
-				</div>
-				<div class="card-footer">
-					<a href="#">Read more <i class="fas fa-arrow-circle-right"></i></a>
-				</div>
-			</div>
-
-			<div class="card">
-				<div class="post-image">
-					<img class="card-img-top" src="images/corona.jpeg">
-				</div>
-				<div class="card-body">
-					<h5 class="card-title">Corona</h5>
-					<p class="card-text">18 more COVID-19 patients have been identified in Wattala, Hendala,Bopitiya &
-						Uswetakeiyyawa areas.</p>
-
-					<ul style="list-style: none;">
-						<li><i class="fa fa-calendar"></i> October 14, 2020</li>
-						<li><i class="fa fa-pencil-alt"></i> Admin</li>
-					</ul>
-				</div>
-				<div class="card-footer">
-					<a href="#">Read more <i class="fas fa-arrow-circle-right"></i></a>
-				</div>
-			</div>
-
-
-		</div>
-		<br>
-		<br>
-		<div class="row">
-			<button class="btn btn-success ml-5 font-weight-bold load-more">Load more <i class="fas fa-angle-right load-more-icon"></i></button>
-		</div>
-	</section>
-</div>
-<!-- End of latest news -->
 
 <!-- Calender and upcoming events -->
 <div class="row p-2">
@@ -207,8 +151,6 @@ include 'support/header.php';
 						<h1><a href="php/event-add.php?view_id=<?php echo $event->e_id; ?>"> <?php echo $event->e_name ?></a></h1>
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fas fa-calendar"></i> <?php echo $dayName ?></li>
-							<!-- <li class="list-inline-item"><i class="fas fa-clock"></i>  08:30 - 13:30</li> -->
-							<!-- <li class="list-inline-item"><i class="fas fa-location-arrow"></i>  Colombo</li> -->
 						</ul>
 						<p><a href="php/event-add.php?view_id=<?php echo $event->e_id; ?>"> Event details</a></p>
 					</div>
