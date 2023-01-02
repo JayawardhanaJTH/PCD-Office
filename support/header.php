@@ -2,13 +2,13 @@
 session_start();
 
 // check is logged or not
-if (!isset($_SESSION['logged']) && !($page == "about" || $page == "contact" || $page == 'login' || $page == 'resetPassword' || $page == "register" || $page == 'submitForms')) {
+if (!isset($_SESSION['logged']) && !($page == "about" || $page == "contact" || $page == 'login' || $page == 'resetPassword' || $page == "register")) {
 	header("location: login.php");
 }
 
 //check the cookies is expired or not
 //if expired close the sessions and redirect to login
-if (!isset($_COOKIE['loginSession']) && ($page != "login" && $page != 'resetPassword' && $page != "register" && $page != 'submitForms' && $page != 'contact' && $page != 'about')) {
+if (!isset($_COOKIE['loginSession']) && ($page != "login" && $page != 'resetPassword' && $page != "register"  && $page != 'contact' && $page != 'about')) {
 	session_unset();
 	session_destroy();
 	session_write_close();
@@ -121,15 +121,6 @@ require_once("connection/connection.php");
 								}
 								?>
 
-								<?php
-								if (!isset($_SESSION['logged'])) {
-								?>
-									<a href="online_application.php" class="nav-item nav-link forms" id="forms" onclick="activeLink('forms')">Submit Application
-										<hr class="hrforms">
-									</a>
-								<?php
-								}
-								?>
 								<a href="contact.php" class="nav-item nav-link contact" id="contact" onclick="activeLink('contact')">Contact
 									<hr class="hrcontact">
 								</a>
