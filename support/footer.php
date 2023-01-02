@@ -20,16 +20,26 @@
 			</ul>
 		</div>
 		<div class="one_third">
-			<h6 class="heading">Join with us</h6>
-			<p class="nospace btmspace-15">Submit your email to get latest news immediately.</p>
-			<form method="post" action="#">
-				<fieldset>
-					<legend>Newsletter:</legend>
-					<input class="btmspace-15" type="text" value="" placeholder="Name">
-					<input class="btmspace-15" type="text" value="" placeholder="Email">
-					<button type="submit" value="submit">Submit</button>
-				</fieldset>
-			</form>
+			<div class="mapouter">
+				<div class="gmap_canvas"><iframe width="353" height="299" id="gmap_canvas" src="https://maps.google.com/maps?q=Ihala%20Bomiriya%20Kaduwela&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://2piratebay.org">pirate bay</a><br>
+					<style>
+						.mapouter {
+							position: relative;
+							text-align: right;
+							height: 299px;
+							width: 353px;
+						}
+					</style><a href="https://www.embedgooglemap.net"></a>
+					<style>
+						.gmap_canvas {
+							overflow: hidden;
+							background: none !important;
+							height: 299px;
+							width: 353px;
+						}
+					</style>
+				</div>
+			</div>
 		</div>
 	</footer>
 </div>
