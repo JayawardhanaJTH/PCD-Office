@@ -37,7 +37,7 @@ if (isset($_POST['application_save'])) {
                 Your <b>Application Number :</b> $applicationNo <br>
                 <br>Thank You !";
 
-        $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
         mail($to, $mailSubject, $emailBody, $header);
 

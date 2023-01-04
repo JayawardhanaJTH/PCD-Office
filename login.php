@@ -78,14 +78,14 @@ if (isset($_SESSION['reset_password_send'])) {
 	if ($value) {
 ?>
 		<script type='text/javascript'>
-			success_popup("Your new password is sent to your email!");
+			success_popup("Your password is successfully changed!");
 		</script>
 	<?php
 		unset($_SESSION['reset_password_send']);
 	} else {
 	?>
 		<script type='text/javascript'>
-			error_popup("Error on send new password!");
+			error_popup("Error on set new password!");
 		</script>
 <?php
 	}
@@ -93,29 +93,6 @@ if (isset($_SESSION['reset_password_send'])) {
 }
 ?>
 
-<?php
-
-if (isset($_SESSION["FORM_SUBMITTED"])) {
-	if ($_SESSION["FORM_SUBMITTED"] == true) {
-		unset($_SESSION["FORM_SUBMITTED"]);
-
-?>
-		<script type="text/javascript">
-			success_popup('Form has been Submitted');
-		</script>
-	<?php
-	} else {
-
-		unset($_SESSION["FORM_SUBMITTED"]);
-	?>
-		<script type="text/javascript">
-			error_popup('Form has been not submitted');
-		</script>
-<?php
-	}
-}
-
-?>
 </body>
 
 </html>
