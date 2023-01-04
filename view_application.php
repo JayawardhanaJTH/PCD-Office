@@ -9,6 +9,10 @@ $sql = "SELECT * FROM application WHERE applicationId='$id'";
 
 $result = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($result);
+
+$feedback_sql = "SELECT feedback FROM feedback WhERE applicationId='$id'";
+$feedback_result = mysqli_query($conn, $feedback_sql);
+$feedback_data = mysqli_fetch_assoc($feedback_result);
 ?>
 <div class="container p-1">
     <div class="border p-2">
@@ -207,11 +211,33 @@ $data = mysqli_fetch_assoc($result);
     </div>
 
     <?php
-    if ($data['approval'] == '1' || $data['approval'] == '3') {
+    if ($data['approval'] != '0') {
     ?>
         <div class="form-group">
             <label for="comment">Comment</label>
             <textarea name="comment" id="comment" class="form-control" disabled><?php echo $data['comment'] ?></textarea>
+        </div>
+    <?php
+    }
+
+    if ($data['approval'] != 0 && $_SESSION['TYPE'] == 0 && !$feedback_data) {
+    ?>
+        <form action="php/submit_feedback.php" method="POST">
+            <div class="form-group">
+                <label for="feedback">Feedback</label>
+                <textarea name="feedback" id="feedback" class="form-control" required></textarea>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <div class="m-3 text-center">
+                <input type="submit" value="Submit Feedback" name="feedbackSubmit" id="submit" class="btn btn-danger">
+            </div>
+        </form>
+    <?php
+    } else if ($data['approval'] != 0 && $feedback_data) {
+    ?>
+        <div class="form-group">
+            <label for="feedback">Feedback</label>
+            <textarea name="feedback" id="feedback" class="form-control" disabled><?php echo $feedback_data['feedback'] ?></textarea>
         </div>
     <?php
     }
@@ -222,7 +248,6 @@ $data = mysqli_fetch_assoc($result);
                 <label for="comment">Comment</label>
                 <textarea name="comment" id="comment" class="form-control" required></textarea>
             </div>
-            <input type="hidden" name="id" value="<?php echo $id ?>">
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="m-3 text-center">
                 <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
@@ -235,4 +260,25 @@ $data = mysqli_fetch_assoc($result);
 </div>
 <?php
 include 'support/footer.php';
+
+if (isset($_SESSION["ERROR"])) {
+    if ($_SESSION["ERROR"] == false) {
+        unset($_SESSION["ERROR"]);
+
+?>
+        <script type="text/javascript">
+            success_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+    <?php
+    } else {
+
+        unset($_SESSION["ERROR"]);
+    ?>
+        <script type="text/javascript">
+            error_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+<?php
+    }
+}
+
 ?>
