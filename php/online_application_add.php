@@ -41,11 +41,8 @@ if (isset($_POST['application_save'])) {
 
         mail($to, $mailSubject, $emailBody, $header);
 
-        if (isset($_SESSION['logged'])) {
-            header('location: ../online_application_home.php');
-        } else {
-            header('location: ../login.php');
-        }
+        header('location: ../online_application_home.php');
+
         exit();
     } else {
         $_SESSION["FORM_SUBMITTED"] = false;
