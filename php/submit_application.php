@@ -60,3 +60,6 @@ if ($status == '1') {
     $sen = mail($to, $mailSubject, $emailBody, $header);
     header("location: ../approvals.php");
 }
+
+$_SESSION['ERROR'] = false;
+$_SESSION['MESSAGE'] = "Status updated";

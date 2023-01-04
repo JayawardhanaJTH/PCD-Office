@@ -75,6 +75,27 @@ $application = mysqli_fetch_all($result_application, MYSQLI_ASSOC);
 
 <?php
 include "support/footer.php";
+
+if (isset($_SESSION["ERROR"])) {
+    if ($_SESSION["ERROR"] == false) {
+        unset($_SESSION["ERROR"]);
+
+?>
+        <script type="text/javascript">
+            success_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+    <?php
+    } else {
+
+        unset($_SESSION["ERROR"]);
+    ?>
+        <script type="text/javascript">
+            error_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+<?php
+    }
+}
+
 ?>
 <script>
     $(function() {
