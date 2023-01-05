@@ -4,7 +4,7 @@ $page = "approvals";
 include "support/header.php";
 
 if ($_SESSION['TYPE'] != '1' && $_SESSION['TYPE'] != '2') {
-    header("location: support/error.php");
+    header("location: error.php");
 }
 
 $sql1  = "SELECT * FROM application";

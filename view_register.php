@@ -1,6 +1,6 @@
 <?php
    if($_SESSION['TYPE'] != '1'){
-        header("location: support/error.php");
+        header("location: error.php");
     }
     $page = "application-view";
 
