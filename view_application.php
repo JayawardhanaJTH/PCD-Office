@@ -241,7 +241,7 @@ $feedback_data = mysqli_fetch_assoc($feedback_result);
         </div>
     <?php
     }
-    if (($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') && ($data['approval'] == '0')) {
+    if (($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') && ($data['approval'] != '3')) {
     ?>
         <form action="php/submit_application.php " method=" post">
             <div class="form-group">
@@ -250,8 +250,20 @@ $feedback_data = mysqli_fetch_assoc($feedback_result);
             </div>
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="m-3 text-center">
-                <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
-                <input type="submit" value="Reject" name="status" id="reject" class="btn btn-danger">
+                <?php
+                if ($data['approval'] == 0) {
+                ?>
+                    <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
+                    <input type="submit" value="Reject" name="status" id="reject" class="btn btn-danger">
+
+                <?php
+                } else {
+                ?>
+                    <input type="submit" value="Update Comment" name="comment_btn" id="comment_btn" class="btn btn-success" style="background:green;">
+
+                <?php
+                }
+                ?>
             </div>
         </form>
     <?php

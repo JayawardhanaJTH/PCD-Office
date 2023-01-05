@@ -7,7 +7,7 @@ $user_type = $_SESSION['TYPE'];
 $comment = $_GET['comment'];
 
 $status = '3';
-if ($submit_status == 'Approve') {
+if ($submit_status == 'Approve' || isset($_GET['comment_btn'])) {
     $status = '1';
 }
 
@@ -39,14 +39,27 @@ mysqli_query($conn, $sql);
 
 if ($status == '1') {
 
-    $to = $email;
-    $mailSubject =  $cat['categoryName'] . " Application Approved.";
-    $emailBody = "Dear <b> " . $application['applicantName'] . "</b> your Application (" . ($application['applicationNo']) . ") is Approved. <br>
-                <br>Thank You !";
+    if (isset($_GET['comment_btn'])) {
+        $to = $email;
+        $mailSubject =  $cat['categoryName'] . " Application Approved.";
+        $emailBody = "Dear <b> " . $application['applicantName'] . "</b> your Application (" . ($application['applicationNo']) . ") status is updated. <br>
+                    New Status : $comment
+                    <br>Thank You !";
 
-    $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
-    $sen = mail($to, $mailSubject, $emailBody, $header);
+        $sen = mail($to, $mailSubject, $emailBody, $header);
+    } else {
+
+        $to = $email;
+        $mailSubject =  $cat['categoryName'] . " Application Approved.";
+        $emailBody = "Dear <b> " . $application['applicantName'] . "</b> your Application (" . ($application['applicationNo']) . ") is Approved. <br>
+                    <br>Thank You !";
+
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
+
+        $sen = mail($to, $mailSubject, $emailBody, $header);
+    }
     header("location: ../approvals.php");
 } else {
     $to = $email;
