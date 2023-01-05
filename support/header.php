@@ -2,7 +2,7 @@
 session_start();
 
 // check is logged or not
-if (!isset($_SESSION['logged']) && !($page == "about" || $page == "contact" || $page == 'login' || $page == 'resetPassword' || $page == "register")) {
+if (!isset($_SESSION['logged']) && !($page == "about" || $page == "contact" || $page == 'login' || $page == 'resetPassword' || $page == "register" || $page = "error")) {
 	header("location: login.php");
 }
 
