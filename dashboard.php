@@ -95,11 +95,11 @@ include "support/header.php";
 					</a>
 				</div>
 				<div class="col-md-6 col-sm-12 mb-3">
-					<a href="details.php">
+					<a href="report.php">
 
 						<div class="card">
 							<div class="card-header text-center">
-								<h1><i class="fa fa-info-circle"> Report</i></h1>
+								<h1><i class="fa fa-info-circle">Details</i></h1>
 							</div>
 							<div class="card-body text-center">
 								<div class="details">
