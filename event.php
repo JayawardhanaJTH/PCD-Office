@@ -86,7 +86,7 @@ if (isset($_SESSION["EVENT_ID"])) {
         <div class="container">
             <div class="m-2 m-md-0">
                 <h1 class="font-weight-bold event_topic">Event planner</h1>
-                <p class="text-muted">Add events which organized by the secretary deviation</p>
+                <p class="text-muted">Add events which organized by the PCD office</p>
             </div>
             <div class="row m-2 m-lg-0 justify-content-md-center">
                 <form method="post" action="php/event-add.php" enctype="multipart/form-data" onsubmit="return validateForm()" class="event_form col-lg-8" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
