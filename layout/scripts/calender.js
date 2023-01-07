@@ -18,6 +18,11 @@ function loadDates(dates, months, years, ids) {
   for (let i = 0; i < years.length; i++) {
     eventsYears.add(years[i]);
   }
+
+  // console.log("eventsDates", eventsDates);
+  // console.log("eventsIDs", eventsIDs);
+  // console.log("eventsMonths", eventsMonths);
+  // console.log("eventsYears", eventsYears);
   dateGenerate();
 }
 

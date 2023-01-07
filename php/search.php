@@ -34,26 +34,28 @@ $output .= "
 
 
 while ($row = $rs->fetch_assoc()) {
-    $id = $row['applicationId'];
-    $applicationNo = $row['applicationNo'];
-    $date = $row['date'];
-    $approval = $row['approval'];
-    $reason = $row['reason'];
+  $id = $row['applicationId'];
+  $applicationNo = $row['applicationNo'];
+  $date = $row['date'];
+  $approval = $row['approval'];
+  $reason = $row['reason'];
 
+  $status = "Not Approved";
+
+  if ($approval == 1) {
+    $status = "Approved";
+  } else if ($approval == 0) {
     $status = "Not Approved";
+  } else {
+    $status = "Rejected";
+  }
 
-    if ($approval == 1) {
-        $status = "Approved";
-    } else {
-        $status = "Rejected";
-    }
+  $sql2 = "SELECT categoryName FROM application_category WHERE categoryCode = '$reason'";
+  $result2 = mysqli_query($conn, $sql2);
+  $cat = mysqli_fetch_assoc($result2);
+  $category = $cat['categoryName'];
 
-    $sql2 = "SELECT categoryName FROM application_category WHERE categoryCode = '$reason'";
-    $result2 = mysqli_query($conn, $sql2);
-    $cat = mysqli_fetch_assoc($result2);
-    $category = $cat['categoryName'];
-
-    $output .= "
+  $output .= "
             <tr>
                 <td hidden>$id</td>
                 <td><a href='view_application.php?id=" . $id . "'> $applicationNo</a></td>

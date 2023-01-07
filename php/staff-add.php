@@ -41,7 +41,74 @@ if ($_POST['id'] == "insert") {
     mysqli_close($conn);
 }
 
-if ($_POST['id'] == "show") {
+if ($_POST['id'] == "view") {
+
+    $output = "";
+
+    $output .= "
+        <table id=\"example1\" class=\"table hover table-bordered \">
+            <thead class='text-center'>
+            <tr>    
+                <th hidden>Id</th>          
+                <th>First Name</th>
+                <th>Last Name</th>              
+                <th>Email</th>
+                <th>Username</th>
+                <th>Gender</th>
+                <th>Contact Number</th>  
+            </tr>
+            </thead>
+            <tbody class='text-center'>
+    ";
+
+    $query = "SELECT * FROM staff WHERE type = '2' ORDER by staffId";
+
+    $rs = $conn->query($query);
+
+    while ($row = $rs->fetch_assoc()) {
+        $staffId = $row['staffId'];
+        $first_name = $row['firstName'];
+        $last_name = $row['lastName'];
+        $username = $row['username'];
+        $email = $row['email'];
+        $gender = $row['gender'];
+        $contact_number = $row['contactNumber'];
+        $address = $row['address'];
+        $nic = $row['nic'];
+
+        $output .= "
+            <tr>
+                <td hidden>$staffId</td>
+                <td>$first_name</td>
+                <td>$last_name</td>            
+                <td>$email</td>
+                <td>$$username</td>
+                <td>$gender</td>
+                <td>$contact_number</td>
+                
+            </tr>
+        ";
+    }
+
+    $output .= '
+        </tbody>
+    </table>
+
+   <script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo("#example1_wrapper .col-md-6:eq(0)");
+    });
+  </script>
+
+    ';
+
+    echo $output;
+}
+
+if ($_POST['id'] == "edit") {
 
     $output = "";
 

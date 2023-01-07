@@ -45,31 +45,8 @@ include "support/header.php";
 			</div>
 		</div>
 
-		<!-- contact forum -->
-		<div class="container-fluid text-white contact_message pb-1 mb-3">
 
-			<form action="#">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" class="form-control">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="3" class="form-control"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="row justify-content-center mb-3">
-					<input type="submit" value="Send" class="btn">
-				</div>
-			</form>
-		</div>
-
-		<!-- Gramaniladari contacts -->
+		<!-- seat agents contacts -->
 		<div class="container-fluid">
 			<div class="alert-secondary topic_bar">
 				<h1 class="ml-5 topic">Electoral Seat Agents Details</h1>

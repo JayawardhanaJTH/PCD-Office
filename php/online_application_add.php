@@ -37,15 +37,12 @@ if (isset($_POST['application_save'])) {
                 Your <b>Application Number :</b> $applicationNo <br>
                 <br>Thank You !";
 
-        $header = "From: secraterywththala@gmail.com\r\nContent-Type: text/html;";
+        $header = "From: pcdsecretaryoffice@gmail.com\r\nContent-Type: text/html;";
 
         mail($to, $mailSubject, $emailBody, $header);
 
-        if (isset($_SESSION['logged'])) {
-            header('location: ../online_application_home.php');
-        } else {
-            header('location: ../login.php');
-        }
+        header('location: ../online_application_home.php');
+
         exit();
     } else {
         $_SESSION["FORM_SUBMITTED"] = false;

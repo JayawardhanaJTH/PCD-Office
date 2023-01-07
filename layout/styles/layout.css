@@ -587,7 +587,7 @@
 /* Footer
 --------------------------------------------------------------------------------------------------------------- */
 #footer {
-  padding: 80px 0;
+  padding: 20px 0;
 }
 
 #footer .heading {
@@ -1324,7 +1324,8 @@ table a,
   } /* Change it to suit your needs - default is the one_third grid width */
 
   #footer {
-    padding-bottom: 50px;
+    display: none;
+    /* padding-bottom: 50px; */
   } /* Not required, just looks a little better */
 }
 

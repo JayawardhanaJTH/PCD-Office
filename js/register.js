@@ -65,7 +65,6 @@ function ValidateEmail(email) {
 function CheckPassword(password) {
   var passwordFormat =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/g;
-  console.log(password.match(passwordFormat));
 
   if (password.match(passwordFormat)) {
     return true;

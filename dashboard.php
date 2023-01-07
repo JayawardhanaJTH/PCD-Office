@@ -80,30 +80,30 @@ include "support/header.php";
 			?>
 				<div class="w-100"></div>
 				<div class="col-md-6 col-sm-12 mb-3">
-					<a href="income.php">
+					<a href="feedback.php">
 
 						<div class="card">
 							<div class="card-header text-center">
-								<h1><i class="fa fa-coins"> Income</i></h1>
+								<h1><i class="fa fa-coins"> Feedbacks</i></h1>
 							</div>
 							<div class="card-body text-center">
 								<div class="details">
-									<p>About income details</p>
+									<p>About feedbacks submitted by peoples</p>
 								</div>
 							</div>
 						</div>
 					</a>
 				</div>
 				<div class="col-md-6 col-sm-12 mb-3">
-					<a href="details.php">
+					<a href="report.php">
 
 						<div class="card">
 							<div class="card-header text-center">
-								<h1><i class="fa fa-info-circle"> Details</i></h1>
+								<h1><i class="fa fa-info-circle">Details</i></h1>
 							</div>
 							<div class="card-body text-center">
 								<div class="details">
-									<p>About Secretary Division Details</p>
+									<p>About Summary details</p>
 								</div>
 							</div>
 						</div>

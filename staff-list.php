@@ -2,14 +2,18 @@
 $page = "staff-list";
 $type = "form";
 include "support/header.php";
+$viewType = $_GET['viewType'];
 ?>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" />
+
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
 
 <div class="container">
     <div class="text-center mb-5">
+        <input type="hidden" id="viewType" value="<?php echo $viewType ?>" />
         <h1>Staff List</h1>
     </div>
     <div id="table">

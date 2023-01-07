@@ -9,6 +9,10 @@ $sql = "SELECT * FROM application WHERE applicationId='$id'";
 
 $result = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($result);
+
+$feedback_sql = "SELECT feedback FROM feedback WhERE applicationId='$id'";
+$feedback_result = mysqli_query($conn, $feedback_sql);
+$feedback_data = mysqli_fetch_assoc($feedback_result);
 ?>
 <div class="container p-1">
     <div class="border p-2">
@@ -196,9 +200,11 @@ $data = mysqli_fetch_assoc($result);
                                         ?></b></p>
                 </div>
                 <div class="col-md-3">
-                    <p>Approved Date:<?php if ($data['approval'] == '1') {
-                                            echo date("Y-m-d", strtotime($data['approved_date']));
-                                        }; ?></p>
+                    <p><?php if ($data['approval'] == '1') {
+                            echo "Last Checked Date:" . date("Y-m-d", strtotime($data['approved_date']));
+                        } else if ($data['approval'] == '3') {
+                            echo "Rejected Date:" . date("Y-m-d", strtotime($data['approved_date']));
+                        }; ?></p>
                 </div>
 
             </div>
@@ -207,7 +213,7 @@ $data = mysqli_fetch_assoc($result);
     </div>
 
     <?php
-    if ($data['approval'] == '1' || $data['approval'] == '3') {
+    if ($data['approval'] != '0') {
     ?>
         <div class="form-group">
             <label for="comment">Comment</label>
@@ -215,7 +221,29 @@ $data = mysqli_fetch_assoc($result);
         </div>
     <?php
     }
-    if (($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') && ($data['approval'] == '0')) {
+
+    if ($data['approval'] != 0 && $_SESSION['TYPE'] == 0 && !$feedback_data) {
+    ?>
+        <form action="php/submit_feedback.php" method="POST">
+            <div class="form-group">
+                <label for="feedback">Feedback</label>
+                <textarea name="feedback" id="feedback" class="form-control" required></textarea>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $id ?>">
+            <div class="m-3 text-center">
+                <input type="submit" value="Submit Feedback" name="feedbackSubmit" id="submit" class="btn btn-danger">
+            </div>
+        </form>
+    <?php
+    } else if ($data['approval'] != 0 && $feedback_data) {
+    ?>
+        <div class="form-group">
+            <label for="feedback">Feedback</label>
+            <textarea name="feedback" id="feedback" class="form-control" disabled><?php echo $feedback_data['feedback'] ?></textarea>
+        </div>
+    <?php
+    }
+    if (($_SESSION['TYPE'] == '1' || $_SESSION['TYPE'] == '2') && ($data['approval'] != '3')) {
     ?>
         <form action="php/submit_application.php " method=" post">
             <div class="form-group">
@@ -223,10 +251,21 @@ $data = mysqli_fetch_assoc($result);
                 <textarea name="comment" id="comment" class="form-control" required></textarea>
             </div>
             <input type="hidden" name="id" value="<?php echo $id ?>">
-            <input type="hidden" name="id" value="<?php echo $id ?>">
             <div class="m-3 text-center">
-                <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
-                <input type="submit" value="Reject" name="status" id="reject" class="btn btn-danger">
+                <?php
+                if ($data['approval'] == 0) {
+                ?>
+                    <input type="submit" value="Approve" name="status" id="approve" class="btn btn-success" style="background:green;">
+                    <input type="submit" value="Reject" name="status" id="reject" class="btn btn-danger">
+
+                <?php
+                } else {
+                ?>
+                    <input type="submit" value="Update Comment" name="comment_btn" id="comment_btn" class="btn btn-success" style="background:green;">
+
+                <?php
+                }
+                ?>
             </div>
         </form>
     <?php
@@ -235,4 +274,25 @@ $data = mysqli_fetch_assoc($result);
 </div>
 <?php
 include 'support/footer.php';
+
+if (isset($_SESSION["ERROR"])) {
+    if ($_SESSION["ERROR"] == false) {
+        unset($_SESSION["ERROR"]);
+
+?>
+        <script type="text/javascript">
+            success_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+    <?php
+    } else {
+
+        unset($_SESSION["ERROR"]);
+    ?>
+        <script type="text/javascript">
+            error_popup('<?php echo $_SESSION["MESSAGE"] ?>');
+        </script>
+<?php
+    }
+}
+
 ?>

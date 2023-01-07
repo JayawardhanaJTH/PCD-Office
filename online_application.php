@@ -1,6 +1,6 @@
 <?php
 
-$page = "submitForms";
+$page = "forms";
 $type = "form";
 setcookie("pageName", $page, time() + (86400 * 30), "/");
 
@@ -177,10 +177,8 @@ $user = mysqli_fetch_assoc($result);
                         <div class="form-group">
                             <label for="referrer">Referred person</label>
                             <label for="referrer">(යොමු කල පුද්ගලයා)</label>
-                            <input type="text" name="referrer" id="referrer" class="form-control" placeholder="Referred person" required>
-                            <div class="invalid-feedback">
-                                Please enter a name.
-                            </div>
+                            <input type="text" name="referrer" id="referrer" class="form-control" placeholder="Referred person">
+
                         </div>
                     </li>
                     <?php
@@ -220,11 +218,6 @@ $user = mysqli_fetch_assoc($result);
                 </li>
             </ol>
 
-            <div class="text-center mb-5">
-
-                <p class="text-dark">I hereby confirm that I have inspected the above business and that the business is
-                    eligible for registration.</p>
-            </div>
             <div class="row justify-content-center mb-5">
 
                 <div class="col-md-3">

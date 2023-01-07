@@ -4,7 +4,11 @@ session_start();
 require_once(__DIR__ . '/../connection/connection.php');
 
 if (isset($_POST['reset_btn'])) {
+    $isStaff = false;
+    $userId;
+
     $email = $_POST['email'];
+    $pass = $_POST['newPassword'];
 
     $Err = '';
     $errflag = false;
@@ -18,40 +22,66 @@ if (isset($_POST['reset_btn'])) {
     }
 
     $sanitized_email = mysqli_escape_string($conn, $email);
-    $statement = mysqli_prepare($conn, "SELECT pid FROM people WHERE email = ?");
+    $sanitized_password = mysqli_escape_string($conn, $pass);
 
-    mysqli_stmt_bind_param($statement, 's', $sanitized_email);
-    mysqli_stmt_execute($statement);
-    mysqli_stmt_bind_result($statement, $userId);
-    mysqli_stmt_fetch($statement);
-    mysqli_stmt_close($statement);
+    $people_statement = mysqli_prepare($conn, "SELECT peopleId FROM people WHERE email = ?");
 
-    if ($userId) {
-        $chars = "21q1ul17*uU3X*c@xnWrm*1wyS@db#j3zvkO@oesKLz45Ar9erLqHRmQ#d17#rvcbpgEmWeijbPV9CqrWxGSpYrz1vqfSxEIWv@l";
-        $pass = "";
+    mysqli_stmt_bind_param($people_statement, 's', $sanitized_email);
+    mysqli_stmt_execute($people_statement);
+    mysqli_stmt_bind_result($people_statement, $peopleId);
+    mysqli_stmt_fetch($people_statement);
+    mysqli_stmt_close($people_statement);
 
+    if (!$peopleId) {
+        $staff_statement = mysqli_prepare($conn, "SELECT staffId FROM staff WHERE email = ?");
 
-        for ($i = 0; $i < 8; $i++) {
-            $x = floor(rand(0, 20) * 2 / 40.2 * strlen($chars));
-            $pass .= (string)$chars[$x - 1];
+        mysqli_stmt_bind_param($staff_statement, 's', $sanitized_email);
+        mysqli_stmt_execute($staff_statement);
+        mysqli_stmt_bind_result($staff_statement, $staffId);
+        mysqli_stmt_fetch($staff_statement);
+        mysqli_stmt_close($staff_statement);
+
+        if ($staffId) {
+            $isStaff = true;
+            $userId = $staffId;
         }
+    } else {
+        $userId = $peopleId;
+    }
 
+
+    if (!$userId && !$errflag) {
+        $Err = "The entered email is not found! Please check and enter again.";
+    }
+
+    if ($userId && !$errflag) {
 
         $subject = "Reset Password";
         $headers = array(
-            "From: secraterywththala@gmail.com",
-            "Reply-To: replyto@example.com",
+            "From: pcdsecretaryoffice@gmail.com",
+            "Reply-To: pcdsecretaryoffice@gmail.com",
             "X-Mailer: PHP/" . PHP_VERSION
         );
         $headers = implode("\r\n", $headers);
-        $password = $pass;
+
+        //encrypt password
+        $password = $sanitized_password;
         $encPass = md5($password);
-        $emailBody = "Your password is rested! use this for login.\n\nPassword: " . $password;
+        date_default_timezone_set('Asia/Colombo');
+
+        $emailBody = "You have successfully changed your account Password on " . date('d M Y H:i:s') .
+            "! If you did not make this change and believe your account has been compromised, 
+        please login to site and reset password.";
 
         if (mail($sanitized_email, $subject, $emailBody, "From: pcdsecretaryoffice@gmail.com")) {
 
             //update database
-            $updateUserPasswordQuery = "UPDATE people SET password='$encPass' WHERE pid = '$userId'";
+            if ($isStaff) {
+                $updateUserPasswordQuery = "UPDATE staff SET password='$encPass' WHERE staffId = '$userId'";
+            } else {
+
+                $updateUserPasswordQuery = "UPDATE people SET password='$encPass' WHERE peopleId = '$userId'";
+            }
             mysqli_query($conn, $updateUserPasswordQuery);
 
             $_SESSION['reset_password_send'] = true;
@@ -67,7 +97,8 @@ if (isset($_POST['reset_btn'])) {
             exit();
         }
     } else {
-        $_SESSION['user_not_found'] = true;
+        $_SESSION['ERROR'] = true;
+        $_SESSION['ERROR_MESSAGE'] = $Err;
         session_write_close();
 
         header("Location: ../forget-password.php");
