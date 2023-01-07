@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2023 at 03:40 PM
+-- Generation Time: Jan 07, 2023 at 08:56 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -76,7 +76,8 @@ INSERT INTO `application_category` (`applicationCategoryId`, `categoryName`, `ca
 (2, 'Religous', 'RL'),
 (3, 'Personal', 'PL'),
 (4, 'Organization', 'SO'),
-(5, 'Job', 'JO');
+(5, 'Job', 'JO'),
+(6, 'Other', 'OT');
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ CREATE TABLE `events` (
   `e_date` date NOT NULL,
   `e_image` varchar(500) CHARACTER SET latin1 NOT NULL,
   `e_description` varchar(500) NOT NULL,
-  `e_postDate` datetime NOT NULL DEFAULT current_timestamp()
+  `e_postDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -99,8 +100,25 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`e_id`, `e_name`, `e_date`, `e_image`, `e_description`, `e_postDate`) VALUES
-(2, 'සමෘද්ධි සහනාධාර', '2021-04-03', 'samurdi.jpg', 'සමෘද්ධි සහනාධාර ලබා දෙන දිනය 2021.4.3\r\n ', '2021-03-03 20:24:38'),
-(3, 'අධ්‍යයාපන ආධාර ලබා දීම ', '2021-04-25', 'donation.jpg', 'අඩු ආදායම් ලාභී පවුල් වල ළමුන්ට අධ්‍යයාපන ආධාර ලබා දෙන දිනය 2021.4.25\r\n', '2021-03-17 15:11:48');
+(2, 'සමෘද්ධි සහනාධාර', '2021-04-03', 'samurdi.jpg', 'සමෘද්ධි සහනාධාර ලබා දෙන දිනය 2021.4.3\r\n ', '2021-03-03'),
+(3, 'අධ්‍යයාපන ආධාර ලබා දීම ', '2021-04-25', 'donation.jpg', 'අඩු ආදායම් ලාභී පවුල් වල ළමුන්ට අධ්‍යයාපන ආධාර ලබා දෙන දිනය 2021.4.25\r\n', '2021-03-17'),
+(4, 'test', '2023-01-26', 'MicrosoftTeams-image.png', ' ', '2023-01-02'),
+(5, 'test2', '2023-01-13', 'MicrosoftTeams-image.png', ' ', '2023-01-03'),
+(6, 'test3', '2023-01-28', 'logo.png', ' ', '2023-01-03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback` (
+  `feedbackId` int(11) NOT NULL,
+  `feedback` varchar(5000) NOT NULL,
+  `peopleNic` varchar(20) NOT NULL,
+  `applicationId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -149,7 +167,8 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`staffId`, `firstName`, `lastName`, `email`, `username`, `gender`, `contactNumber`, `nic`, `address`, `password`, `type`) VALUES
-(1, 'samantha', 'samantha123@', 'samantha@gmail.com', 'Admin', 'male', '2147483647', '', '12379', '75be1117cc1397ecea7fec6440f9e9c2', 1);
+(1, 'samantha', 'samantha123@', 'samantha@gmail.com', 'Admin', 'male', '2147483647', '', '12379', '75be1117cc1397ecea7fec6440f9e9c2', 1),
+(23, 'staff', 'Staff123@', 'staff@gmail.com', 'staff', 'male', '2222222222', '111111111D', 'test address', 'c3a4565fa4cd39fcbbe98e7178aef508', 2);
 
 --
 -- Indexes for dumped tables
@@ -172,6 +191,12 @@ ALTER TABLE `application_category`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`e_id`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedbackId`);
 
 --
 -- Indexes for table `people`
@@ -199,13 +224,19 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT for table `application_category`
 --
 ALTER TABLE `application_category`
-  MODIFY `applicationCategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `applicationCategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedbackId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `people`
@@ -217,9 +248,20 @@ ALTER TABLE `people`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staffId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `staffId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
+
+-- Stored Procedure --
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `application_summary`(IN `fromDate` DATE, IN `toDate` DATE)
+BEGIN  
+    SELECT COUNT(a.applicationId) As Total FROM application a WHERE a.date BETWEEN fromDate AND toDate;
+	SELECT COUNT(a.applicationId) As Pending FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 0;
+    SELECT COUNT(a.applicationId) As Approved FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 1;
+	SELECT COUNT(a.applicationId) As Rejected FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 3;
+END$$
+DELIMITER ;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
