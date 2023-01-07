@@ -14,9 +14,9 @@ include "support/header.php";
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
       <div class="form-inline">
         <label>Date From: </label>
-        <input type="date" name="fromDate" class="form-control ml-2 mr-2" />
+        <input type="date" name="fromDate" class="form-control ml-2 mr-2" required />
         <label> To: </label>
-        <input type="date" name="toDate" class="form-control ml-2 mr-5" />
+        <input type="date" name="toDate" class="form-control ml-2 mr-5" required />
         <input type="submit" class="btn btn-infor btn-sm" value="Search" name="searchSummary" />
       </div>
     </form>
@@ -26,32 +26,69 @@ include "support/header.php";
     $fromDate = $_GET['fromDate'];
     $toDate = $_GET['toDate'];
 
-    $sql = "SELECT * FROM application WHERE date BETWEEN '$fromDate' AND '$toDate'";
+    $data = array();
 
-  }
+    mysqli_multi_query($conn, "CALL application_summary ('$fromDate','$toDate')");
+
+    while (mysqli_more_results($conn)) {
+
+      if ($result = mysqli_store_result($conn)) {
+
+        while ($row = mysqli_fetch_assoc($result)) {
+          $data[] = $row;
+        }
+        mysqli_free_result($result);
+      }
+      mysqli_next_result($conn);
+    }
+
+    unset($_GET['searchSummary']);
   ?>
-  <div class="p-5">
-    <div class="card-deck">
-      <div class="card">
-        <div class="card-body text-center">
-          <h1 class="h3">Total submitted applications</h1>
-          <h2 class="h2 mt-5">50</h2>
+
+    <div class="row justify-content-around border mt-5">
+      <div class="p-1"> From: <?php echo $fromDate ?></div>
+      <div class="p-1"> To: <?php echo $toDate ?></div>
+    </div>
+
+    <div class="p-5">
+      <div class="card-deck">
+        <div class="card">
+          <a href="approvals.php" class="text-decoration-none">
+            <div class="card-body text-center">
+              <h1 class="h3">Total submitted applications</h1>
+              <h2 class="h2 mt-5"><?php echo $data[0]['Total']; ?></h2>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-body text-center">
-          <h1 class="h3">Total accepted applications</h1>
-          <h2 class="h2 mt-5">50</h2>
+        <div class="card">
+          <a href="approvals.php?showType=0" class="text-decoration-none">
+            <div class="card-body text-center">
+              <h1 class="h3">Total pending applications</h1>
+              <h2 class="h2 mt-5"><?php echo $data[1]['Pending']; ?></h2>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-body text-center">
-          <h1 class="h3">Total rejected applications</h1>
-          <h2 class="h2 mt-5">50</h2>
+        <div class="card">
+          <a href="approvals.php?showType=1" class="text-decoration-none">
+            <div class="card-body text-center">
+              <h1 class="h3">Total accepted applications</h1>
+              <h2 class="h2 mt-5"><?php echo $data[2]['Approved']; ?></h2>
+            </div>
+          </a>
+        </div>
+        <div class="card">
+          <a href="approvals.php?showType=3" class="text-decoration-none">
+            <div class="card-body text-center">
+              <h1 class="h3">Total rejected applications</h1>
+              <h2 class="h2 mt-5"><?php echo $data[3]['Rejected']; ?></h2>
+            </div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  <?php
+  }
+  ?>
 </div>
 
 <?php

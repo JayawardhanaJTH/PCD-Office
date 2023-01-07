@@ -200,9 +200,11 @@ $feedback_data = mysqli_fetch_assoc($feedback_result);
                                         ?></b></p>
                 </div>
                 <div class="col-md-3">
-                    <p>Approved Date:<?php if ($data['approval'] == '1') {
-                                            echo date("Y-m-d", strtotime($data['approved_date']));
-                                        }; ?></p>
+                    <p><?php if ($data['approval'] == '1') {
+                            echo "Last Checked Date:" . date("Y-m-d", strtotime($data['approved_date']));
+                        } else if ($data['approval'] == '3') {
+                            echo "Rejected Date:" . date("Y-m-d", strtotime($data['approved_date']));
+                        }; ?></p>
                 </div>
 
             </div>

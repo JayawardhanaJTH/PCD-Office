@@ -7,7 +7,16 @@ if ($_SESSION['TYPE'] != '1' && $_SESSION['TYPE'] != '2') {
     header("location: error.php");
 }
 
-$sql1  = "SELECT * FROM application";
+$showType = '';
+
+if (isset($_GET["showType"])) {
+    $showType = $_GET["showType"];
+    $sql1  = "SELECT * FROM application WHERE approval = '$showType'";
+} else {
+
+    $sql1  = "SELECT * FROM application";
+}
+
 
 $result_application = mysqli_query($conn, $sql1);
 
