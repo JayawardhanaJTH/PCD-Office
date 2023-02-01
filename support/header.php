@@ -58,6 +58,9 @@ require_once("connection/connection.php");
 	<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 	<link href="layout/styles/Calender.css" rel="stylesheet" type="text/css" media="all">
 	<link href="layout/styles/framework.css" rel="stylesheet" type="text/css" media="all">
+	<link href="bot/style.css" rel="stylesheet" type="text/css" media="all">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </head>
 
@@ -200,3 +203,6 @@ require_once("connection/connection.php");
 			</div>
 		</div>
 	<?php } ?>
+	<?php if (isset($_SESSION['logged'])) {
+		include "bot/bot.php";
+	} ?>
