@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2023 at 08:56 PM
+-- Generation Time: Feb 01, 2023 at 08:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -23,13 +23,25 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `pcd_office` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pcd_office`;
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `application_summary` (IN `fromDate` DATE, IN `toDate` DATE)   BEGIN  
+    SELECT COUNT(a.applicationId) As Total FROM application a WHERE a.date BETWEEN fromDate AND toDate;
+	SELECT COUNT(a.applicationId) As Pending FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 0;
+    SELECT COUNT(a.applicationId) As Approved FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 1;
+	SELECT COUNT(a.applicationId) As Rejected FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 3;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `application`
 --
 
-DROP TABLE IF EXISTS `application`;
 CREATE TABLE `application` (
   `applicationId` int(11) NOT NULL,
   `applicationNo` varchar(100) NOT NULL,
@@ -60,7 +72,6 @@ CREATE TABLE `application` (
 -- Table structure for table `application_category`
 --
 
-DROP TABLE IF EXISTS `application_category`;
 CREATE TABLE `application_category` (
   `applicationCategoryId` int(11) NOT NULL,
   `categoryName` varchar(100) NOT NULL,
@@ -82,10 +93,28 @@ INSERT INTO `application_category` (`applicationCategoryId`, `categoryName`, `ca
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chatbot`
+--
+
+CREATE TABLE `chatbot` (
+  `id` int(11) NOT NULL,
+  `queries` varchar(5000) NOT NULL,
+  `replies` varchar(5000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chatbot`
+--
+
+INSERT INTO `chatbot` (`id`, `queries`, `replies`) VALUES
+(1, 'hi | hello | hey', 'Hi!, How can I help you?');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `events`
 --
 
-DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events` (
   `e_id` int(11) NOT NULL,
   `e_name` varchar(50) NOT NULL,
@@ -112,7 +141,6 @@ INSERT INTO `events` (`e_id`, `e_name`, `e_date`, `e_image`, `e_description`, `e
 -- Table structure for table `feedback`
 --
 
-DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `feedbackId` int(11) NOT NULL,
   `feedback` varchar(5000) NOT NULL,
@@ -126,7 +154,6 @@ CREATE TABLE `feedback` (
 -- Table structure for table `people`
 --
 
-DROP TABLE IF EXISTS `people`;
 CREATE TABLE `people` (
   `peopleId` int(11) NOT NULL,
   `firstname` varchar(50) NOT NULL,
@@ -147,7 +174,6 @@ CREATE TABLE `people` (
 -- Table structure for table `staff`
 --
 
-DROP TABLE IF EXISTS `staff`;
 CREATE TABLE `staff` (
   `staffId` int(11) NOT NULL,
   `firstName` varchar(100) NOT NULL,
@@ -185,6 +211,12 @@ ALTER TABLE `application`
 --
 ALTER TABLE `application_category`
   ADD PRIMARY KEY (`applicationCategoryId`);
+
+--
+-- Indexes for table `chatbot`
+--
+ALTER TABLE `chatbot`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `events`
@@ -227,6 +259,12 @@ ALTER TABLE `application_category`
   MODIFY `applicationCategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `chatbot`
+--
+ALTER TABLE `chatbot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
@@ -251,17 +289,6 @@ ALTER TABLE `staff`
   MODIFY `staffId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
-
--- Stored Procedure --
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `application_summary`(IN `fromDate` DATE, IN `toDate` DATE)
-BEGIN  
-    SELECT COUNT(a.applicationId) As Total FROM application a WHERE a.date BETWEEN fromDate AND toDate;
-	SELECT COUNT(a.applicationId) As Pending FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 0;
-    SELECT COUNT(a.applicationId) As Approved FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 1;
-	SELECT COUNT(a.applicationId) As Rejected FROM application a WHERE a.date BETWEEN fromDate AND toDate AND a.approval = 3;
-END$$
-DELIMITER ;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
